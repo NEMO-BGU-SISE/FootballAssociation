@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface StudentRepository extends JpaRepository<Student, Integer> {
+public interface IStudentRepository extends JpaRepository<Student, Integer> {
 
     public boolean existsByEmail(String email);
 
@@ -15,3 +15,4 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
     @Query("select max(s.id) from Student s")
     public Integer findMaxId();
 }
+

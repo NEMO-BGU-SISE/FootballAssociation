@@ -1,4 +1,4 @@
-package com.nemo.footballassociation.Service;
+package com.nemo.footballassociation;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

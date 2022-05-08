@@ -13,8 +13,11 @@ import java.util.List;
 @RestController
 public class StudentController {
 
-    @Autowired
-    private StudentService studentService;
+    private final StudentService studentService;
+
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
+    }
 
     @RequestMapping(value = "info", method = RequestMethod.GET)
     public String info(){

@@ -8,7 +8,9 @@ public class Student {
 
     @Id
     private int id;
+
     private String name;
+
     private String email;
 
     public Student() {
@@ -36,5 +38,14 @@ public class Student {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

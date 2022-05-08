@@ -1,19 +1,20 @@
 package com.nemo.footballassociation.Service;
 
-import com.nemo.footballassociation.DAL.entity.Student;
-//import com.nemo.footballassociation.DAL.repository.StudentRepository;
-import com.nemo.footballassociation.DAL.repository.StudentRepository;
-import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+import com.nemo.footballassociation.DAL.entity.Student;
+import com.nemo.footballassociation.DAL.repository.IStudentRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 @Service
 public class StudentService {
-    @Autowired
-    private StudentRepository studentRepository;
+    private final IStudentRepository studentRepository;
+
+    public StudentService(IStudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
+    }
 
     @Transactional
     public String createStudent(Student student){
