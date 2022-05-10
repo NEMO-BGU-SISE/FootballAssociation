@@ -16,9 +16,9 @@ public class main {
             BufferedReader reader;
             String line;
             StringBuffer responseContent = new StringBuffer();
-            URL url = new URL("http://localhost:8080/Subscription/read");
+            URL url = new URL("http://localhost:8080/referee");
             HttpURLConnection conn = APIController.getConn(url);
-            APIController.setRequestMethod("GET");
+            APIController.setRequestMethod("POST");
             int status = conn.getResponseCode();
             System.out.println(status);
             if(status > 299){

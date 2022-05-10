@@ -4,8 +4,11 @@ import javax.persistence.Entity;
 
 @Entity
 public class Referee extends Subscription {
-    public Referee(String name, String userName, String password) {
+    private String refereeTraining;
+
+    public Referee(String name, String userName, String password, String refereeTraining) {
         super(name, userName, password);
+        this.refereeTraining = refereeTraining;
     }
 
     public Referee() {

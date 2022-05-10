@@ -23,6 +23,18 @@ public class RefereeController {
     // build create Referee REST API
     @PostMapping
     public ResponseEntity<Referee> saveReferee(@RequestBody Referee referee) {
+        if(referee.getName().matches(".*[0-9].*")){
+            System.out.println("Name contains numbers");
+            return null;
+        }
+        if(!referee.getUserName().matches("^(.+)@(\\S+)$")){
+            System.out.println("The username is not a valid Email address");
+            return null;
+        }
+        if(!referee.getPassword().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$")){
+            System.out.println("The password is not secure enough");
+            return null;
+        }
         return new ResponseEntity<Referee>(refereeService.saveReferee(referee), HttpStatus.CREATED);
     }
 
