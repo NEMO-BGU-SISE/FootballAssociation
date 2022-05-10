@@ -19,6 +19,7 @@ public class RefereeService implements IRefereeService {
 
     @Override
     public Referee saveReferee(Referee referee) {
+        referee.setId(refereeRepository.findMaxId() == null ? 0 : refereeRepository.findMaxId() + 1);
         return refereeRepository.save(referee);
     }
 
@@ -41,8 +42,13 @@ public class RefereeService implements IRefereeService {
     }
 
     @Override
-    public Referee getRefereeByUserName(String userName) throws Exception {
+    public List<Referee> getRefereeByUserName(String userName) {
         return refereeRepository.findByUserName(userName);
+    }
+
+    @Override
+    public boolean existsByUserName(String userName) {
+        return refereeRepository.existsByUserName(userName);
     }
 
     @Override

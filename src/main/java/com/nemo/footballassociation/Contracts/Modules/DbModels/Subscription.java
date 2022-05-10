@@ -1,5 +1,7 @@
 package com.nemo.footballassociation.Contracts.Modules.DbModels;
 
+import org.hibernate.annotations.Generated;
+
 import javax.persistence.*;
 
 @MappedSuperclass
