@@ -2,8 +2,11 @@ package com.nemo.footballassociation.Contracts.Modules.DbModels;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Subscription {
 
     @Id
