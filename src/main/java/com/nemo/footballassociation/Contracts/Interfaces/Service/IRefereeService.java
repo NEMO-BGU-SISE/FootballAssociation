@@ -8,6 +8,7 @@ public interface IRefereeService {
     Referee saveReferee(Referee referee);
     List<Referee> getAllReferee();
     Referee getRefereeById(int id) throws Exception;
+    Referee getRefereeByUserName(String userName) throws Exception;
     Referee updateReferee(Referee referee, int id) throws Exception;
     void deleteReferee(int id) throws Exception;
 }

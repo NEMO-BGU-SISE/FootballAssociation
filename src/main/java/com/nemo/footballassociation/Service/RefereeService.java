@@ -17,14 +17,17 @@ public class RefereeService implements IRefereeService {
         this.refereeRepository = refereeRepository;
     }
 
+    @Override
     public Referee saveReferee(Referee referee) {
         return refereeRepository.save(referee);
     }
 
+    @Override
     public List<Referee> getAllReferee() {
         return refereeRepository.findAll();
     }
 
+    @Override
     public Referee getRefereeById(int id) throws Exception {
 //		Optional<Referee> referee = refereeRepository.findById(id);
 //		if(referee.isPresent()) {
@@ -35,6 +38,11 @@ public class RefereeService implements IRefereeService {
         return refereeRepository.findById(id).orElseThrow(() ->
                 new Exception(""));
 
+    }
+
+    @Override
+    public Referee getRefereeByUserName(String userName) throws Exception {
+        return refereeRepository.findByUserName(userName);
     }
 
     @Override
