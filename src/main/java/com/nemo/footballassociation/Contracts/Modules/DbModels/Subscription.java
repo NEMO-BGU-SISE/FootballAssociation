@@ -2,8 +2,11 @@ package com.nemo.footballassociation.Contracts.Modules.DbModels;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Subscription {
 
     @Id
@@ -36,6 +39,22 @@ public class Subscription {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public boolean login(String userName, String password){
