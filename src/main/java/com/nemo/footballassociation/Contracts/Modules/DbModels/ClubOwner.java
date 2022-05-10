@@ -1,4 +1,4 @@
-package com.nemo.footballassociation.DAL.entity;
+package com.nemo.footballassociation.Contracts.Modules.DbModels;
 
 public class ClubOwner extends Subscription{
     private float salary;

@@ -1,7 +1,7 @@
 package com.nemo.footballassociation.Service;
 
-import com.nemo.footballassociation.DAL.entity.Subscription;
-import com.nemo.footballassociation.DAL.repository.ISubscriptionRepository;
+import com.nemo.footballassociation.Contracts.Modules.DbModels.Subscription;
+import com.nemo.footballassociation.Contracts.Interfaces.Repository.ISubscriptionRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

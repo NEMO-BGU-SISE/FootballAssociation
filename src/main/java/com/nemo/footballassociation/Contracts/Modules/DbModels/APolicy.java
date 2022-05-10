@@ -1,4 +1,4 @@
-package com.nemo.footballassociation.DAL.entity;
+package com.nemo.footballassociation.Contracts.Modules.DbModels;
 
 public abstract class APolicy {
     private APolicy policy;

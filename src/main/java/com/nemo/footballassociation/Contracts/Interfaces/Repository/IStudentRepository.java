@@ -1,5 +1,5 @@
-package com.nemo.footballassociation.DAL.repository;
-import com.nemo.footballassociation.DAL.entity.Student;
+package com.nemo.footballassociation.Contracts.Interfaces.Repository;
+import com.nemo.footballassociation.Contracts.Modules.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

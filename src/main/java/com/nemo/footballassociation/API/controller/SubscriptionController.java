@@ -1,8 +1,6 @@
-package com.nemo.footballassociation.Domain.controller;
+package com.nemo.footballassociation.API.controller;
 
-import com.nemo.footballassociation.DAL.entity.Student;
-import com.nemo.footballassociation.DAL.entity.Subscription;
-import com.nemo.footballassociation.Service.StudentService;
+import com.nemo.footballassociation.Contracts.Modules.DbModels.Subscription;
 import com.nemo.footballassociation.Service.SubscriptionService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

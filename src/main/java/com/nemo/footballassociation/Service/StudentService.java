@@ -1,8 +1,8 @@
 package com.nemo.footballassociation.Service;
 
 
-import com.nemo.footballassociation.DAL.entity.Student;
-import com.nemo.footballassociation.DAL.repository.IStudentRepository;
+import com.nemo.footballassociation.Contracts.Modules.Student;
+import com.nemo.footballassociation.Contracts.Interfaces.Repository.IStudentRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
