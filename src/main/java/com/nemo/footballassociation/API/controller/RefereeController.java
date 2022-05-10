@@ -55,6 +55,19 @@ public class RefereeController {
         }
     }
 
+    @GetMapping("userName/{userName}")
+    public ResponseEntity<Referee> getRefereeByUserName(@PathVariable("userName") String refereeUserName) {
+        try {
+            Referee referee = refereeService.getRefereeByUserName(refereeUserName);
+            if (referee == null)
+                return new ResponseEntity<Referee>(HttpStatus.NOT_FOUND);
+            else
+                return new ResponseEntity<Referee>(referee, HttpStatus.OK);
+        } catch (Exception ex) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     // build update referee REST API
     // http://localhost:8080/api/referees/1
     @PutMapping("{id}")
