@@ -1,13 +1,12 @@
 package com.nemo.footballassociation.Contracts.Modules.DbModels;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import org.hibernate.annotations.Generated;
 
-@Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-public class Subscription {
+import javax.persistence.*;
+
+@MappedSuperclass
+//@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Subscription {
 
     @Id
     private int id;
@@ -57,21 +56,11 @@ public class Subscription {
         this.password = password;
     }
 
-    public boolean login(String userName, String password){
+    public boolean login(String userName, String password) {
         return true;
     }
 
-    public boolean logout(){
+    public boolean logout() {
         return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Subscription{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                '}';
     }
 }

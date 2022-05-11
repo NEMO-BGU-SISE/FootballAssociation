@@ -3,6 +3,7 @@ package com.nemo.footballassociation.API.controller;
 import com.nemo.footballassociation.Contracts.Modules.DbModels.Referee;
 import com.nemo.footballassociation.Contracts.Interfaces.Service.IRefereeService;
 import com.nemo.footballassociation.Service.RefereeService;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,19 +24,21 @@ public class RefereeController {
     // build create Referee REST API
     @PostMapping
     public ResponseEntity<Referee> saveReferee(@RequestBody Referee referee) {
-        if(referee.getName().matches(".*[0-9].*")){
-            System.out.println("Name contains numbers");
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        try {
+            if (referee.getName().matches(".*[0-9].*")) {
+                return new ResponseEntity("Error: Name contains numbers", HttpStatus.BAD_REQUEST);
+            } else if (!referee.getUserName().matches("^(.+)@(\\S+)$")) {
+                return new ResponseEntity("Error: The username is not a valid Email address", HttpStatus.BAD_REQUEST);
+            } else if (!referee.getPassword().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$")) {
+                return new ResponseEntity("Error: The password is not secure enough", HttpStatus.BAD_REQUEST);
+            } else if (refereeService.existsByUserName(referee.getUserName())) {
+                return new ResponseEntity("Error: userName is taken", HttpStatus.BAD_REQUEST);
+            }
+
+            return new ResponseEntity<>(refereeService.saveReferee(referee), HttpStatus.CREATED);
+        } catch (Exception ex) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        if(!referee.getUserName().matches("^(.+)@(\\S+)$")){
-            System.out.println("The username is not a valid Email address");
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-        if(!referee.getPassword().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$")){
-            System.out.println("The password is not secure enough");
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-        return new ResponseEntity<Referee>(refereeService.saveReferee(referee), HttpStatus.CREATED);
     }
 
     // build get all referees REST API
@@ -56,13 +59,13 @@ public class RefereeController {
     }
 
     @GetMapping("userName/{userName}")
-    public ResponseEntity<Referee> getRefereeByUserName(@PathVariable("userName") String refereeUserName) {
+    public ResponseEntity<List<Referee>> getRefereeByUserName(@PathVariable("userName") String refereeUserName) {
         try {
-            Referee referee = refereeService.getRefereeByUserName(refereeUserName);
-            if (referee == null)
-                return new ResponseEntity<Referee>(HttpStatus.NOT_FOUND);
+            List<Referee> referee = refereeService.getRefereeByUserName(refereeUserName);
+            if (referee.size() == 0)
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             else
-                return new ResponseEntity<Referee>(referee, HttpStatus.OK);
+                return new ResponseEntity<>(referee, HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
