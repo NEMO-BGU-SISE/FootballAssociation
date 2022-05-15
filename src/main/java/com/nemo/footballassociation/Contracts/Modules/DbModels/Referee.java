@@ -1,25 +1,29 @@
 package com.nemo.footballassociation.Contracts.Modules.DbModels;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 @Entity
 public class Referee extends Subscription {
-    private String refereeTraining;
+
+    @Enumerated(value = EnumType.STRING)
+    private RefereeTraining refereeTraining;
 
     public Referee() {
     }
 
-    public Referee(String name, String userName, String password, String refereeTraining) {
+    public Referee(String name, String userName, String password, RefereeTraining refereeTraining) {
         super(name, userName, password);
         this.refereeTraining = refereeTraining;
     }
 
 
-    public String getRefereeTraining() {
+    public RefereeTraining getRefereeTraining() {
         return refereeTraining;
     }
 
-    public void setRefereeTraining(String refereeTraining) {
+    public void setRefereeTraining(RefereeTraining refereeTraining) {
         this.refereeTraining = refereeTraining;
     }
 }
