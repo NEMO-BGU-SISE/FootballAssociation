@@ -61,7 +61,7 @@ public class RefereeController {
     @GetMapping("{id}")
     public ResponseEntity<Referee> getRefereeById(@PathVariable("id") int refereeId) {
         try {
-            return new ResponseEntity<>(refereeService.getRefereeById(refereeId), HttpStatus.OK);
+            return new ResponseEntity<Referee>(refereeService.getRefereeById(refereeId), HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
