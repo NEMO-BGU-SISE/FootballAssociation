@@ -7,6 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import java.util.List;
 
@@ -34,6 +35,8 @@ public class RefereeController {
             } else if (refereeService.existsByUserName(referee.getUserName())) {
                 return new ResponseEntity("Error: userName is taken", HttpStatus.BAD_REQUEST);
             }
+            String md5Password = DigestUtils.md5Hex(referee.getPassword());
+            referee.setPassword(md5Password);
 
             return new ResponseEntity<>(refereeService.saveReferee(referee), HttpStatus.CREATED);
         } catch (Exception ex) {

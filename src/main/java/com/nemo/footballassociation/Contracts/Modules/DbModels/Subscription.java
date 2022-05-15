@@ -4,7 +4,8 @@ import org.hibernate.annotations.Generated;
 
 import javax.persistence.*;
 
-@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 //@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Subscription {
 
