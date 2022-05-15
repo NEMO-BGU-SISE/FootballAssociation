@@ -1,7 +1,9 @@
 package com.nemo.footballassociation.API.controller;
 
+import com.nemo.footballassociation.Contracts.Interfaces.Service.ILoggedInUserService;
 import com.nemo.footballassociation.Contracts.Modules.DbModels.Referee;
 import com.nemo.footballassociation.Contracts.Interfaces.Service.IRefereeService;
+import com.nemo.footballassociation.Service.LoggedInUserService;
 import com.nemo.footballassociation.Service.RefereeService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -16,17 +18,21 @@ import java.util.List;
 public class RefereeController {
 
     private IRefereeService refereeService;
+    private ILoggedInUserService loggedInUserService;
 
-    public RefereeController(RefereeService refereeService) {
+    public RefereeController(RefereeService refereeService, LoggedInUserService loggedInUserService) {
         super();
         this.refereeService = refereeService;
+        this.loggedInUserService = loggedInUserService;
     }
 
     // build create Referee REST API
     @PostMapping
-    public ResponseEntity<Referee> saveReferee(@RequestBody Referee referee) {
+    public ResponseEntity<Referee> saveReferee(@RequestHeader("Authorization") String code, @RequestBody Referee referee) {
         try {
-            if (referee.getName().matches(".*[0-9].*")) {
+            if (!loggedInUserService.isRepresentativeOfTheAssociation(code)) {
+                return new ResponseEntity("You are not authorized for this", HttpStatus.UNAUTHORIZED);
+            } else if (referee.getName().matches(".*[0-9].*")) {
                 return new ResponseEntity("Error: Name contains numbers", HttpStatus.BAD_REQUEST);
             } else if (!referee.getUserName().matches("^(.+)@(\\S+)$")) {
                 return new ResponseEntity("Error: The username is not a valid Email address", HttpStatus.BAD_REQUEST);

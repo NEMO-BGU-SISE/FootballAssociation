@@ -13,6 +13,6 @@ public interface IRefereeRepository extends JpaRepository<Referee, Integer> {
 
     public boolean existsByUserName(String userName);
 
-    @Query("select max(s.id) from Referee s")
+    @Query("select max(s.id) from Subscription s")
     public Integer findMaxId();
 }
