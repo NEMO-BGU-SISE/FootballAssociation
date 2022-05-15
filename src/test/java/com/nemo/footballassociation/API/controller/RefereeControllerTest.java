@@ -53,18 +53,18 @@ class RefereeControllerTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        refereeGood = new Referee("Maor", "Maor@Maor.com", "maorMaor12", "Basic");
-        refereeBad1 = new Referee("Maor1", "Maor@Maor.com", "maorMaor12", "Basic");
-        refereeBad2 = new Referee("Maor", "Maor@", "maorMaor12", "Basic");
-        refereeBad3 = new Referee("Maor", "@Maor.com", "maorMaor12", "Basic");
-        refereeBad4 = new Referee("Maor", "Maor.com", "maorMaor12", "Basic");
-        refereeBad5 = new Referee("Maor", "Maor@Maor.com", "maoraor12", "Basic");
-        refereeBad6 = new Referee("Maor", "Maor@Maor.com", "maorMaor", "Basic");
-        refereeBad7 = new Referee("Maor", "Maor@Maor.com", "MAORMAOR", "Basic");
-        refereeBad8 = new Referee("Maor", "Maor@Maor.com", "123456789", "Basic");
-        refereeBad9 = new Referee("Maor", "Maor@Maor.com", "123456", "Basic");
-        refereeBad10 = new Referee("Maor", "Maor@Maor.com", "maor", "Basic");
-        refereeBad11 = new Referee("Maor", "Maor@Maor.com", "MAOR", "Basic");
+//        refereeGood = new Referee("Maor", "Maor@Maor.com", "maorMaor12", "Basic");
+//        refereeBad1 = new Referee("Maor1", "Maor@Maor.com", "maorMaor12", "Basic");
+//        refereeBad2 = new Referee("Maor", "Maor@", "maorMaor12", "Basic");
+//        refereeBad3 = new Referee("Maor", "@Maor.com", "maorMaor12", "Basic");
+//        refereeBad4 = new Referee("Maor", "Maor.com", "maorMaor12", "Basic");
+//        refereeBad5 = new Referee("Maor", "Maor@Maor.com", "maoraor12", "Basic");
+//        refereeBad6 = new Referee("Maor", "Maor@Maor.com", "maorMaor", "Basic");
+//        refereeBad7 = new Referee("Maor", "Maor@Maor.com", "MAORMAOR", "Basic");
+//        refereeBad8 = new Referee("Maor", "Maor@Maor.com", "123456789", "Basic");
+//        refereeBad9 = new Referee("Maor", "Maor@Maor.com", "123456", "Basic");
+//        refereeBad10 = new Referee("Maor", "Maor@Maor.com", "maor", "Basic");
+//        refereeBad11 = new Referee("Maor", "Maor@Maor.com", "MAOR", "Basic");
     }
 
     @AfterEach
