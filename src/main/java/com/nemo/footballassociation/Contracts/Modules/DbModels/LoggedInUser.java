@@ -1,16 +1,13 @@
 package com.nemo.footballassociation.Contracts.Modules.DbModels;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 public class LoggedInUser {
     @Id
     private int Id;
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "subscriptionId")
     private Subscription subscription;
     private String code;

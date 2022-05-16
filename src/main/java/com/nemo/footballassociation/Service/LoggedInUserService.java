@@ -1,24 +1,33 @@
 package com.nemo.footballassociation.Service;
 
 import com.nemo.footballassociation.Contracts.Interfaces.Repository.ILoggedInUserRepository;
+import com.nemo.footballassociation.Contracts.Interfaces.Repository.IRepresentativeOfTheAssociationRepository;
 import com.nemo.footballassociation.Contracts.Interfaces.Service.ILoggedInUserService;
 import com.nemo.footballassociation.Contracts.Modules.DbModels.LoggedInUser;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class LoggedInUserService implements ILoggedInUserService {
     private ILoggedInUserRepository loggedInUserRepository;
+    private IRepresentativeOfTheAssociationRepository representativeOfTheAssociationRepository;
 
-    public LoggedInUserService(ILoggedInUserRepository loggedInUserRepository) {
+    public LoggedInUserService(ILoggedInUserRepository loggedInUserRepository, IRepresentativeOfTheAssociationRepository representativeOfTheAssociationRepository) {
         this.loggedInUserRepository = loggedInUserRepository;
+        this.representativeOfTheAssociationRepository = representativeOfTheAssociationRepository;
     }
 
     @Override
     public boolean isRepresentativeOfTheAssociation(String code) {
         if (!loggedInUserRepository.existsByCode(code)) return false;
-
-        //TODO: add logic!! use expiration date!
-        return true;
+        try {
+            LoggedInUser loggedInUser = getByCode(code);
+            if (LocalDateTime.now().isAfter(loggedInUser.getExpiredDateTime())) return false;
+            return representativeOfTheAssociationRepository.existsById(loggedInUser.getSubscription().getId());
+        } catch (Exception exception) {
+            return false;
+        }
     }
 
     @Override

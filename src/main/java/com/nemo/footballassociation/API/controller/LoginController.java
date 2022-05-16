@@ -12,6 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
+
+import static com.fasterxml.jackson.databind.jsonFormatVisitors.JsonValueFormat.UUID;
 
 @RestController
 @RequestMapping("login")
@@ -32,8 +35,8 @@ public class LoginController {
             if (subscriptionRepository.existsByUserName(subscriptionLoginDto.getUserName())) {
                 Subscription subscription = subscriptionRepository.findByUserName(subscriptionLoginDto.getUserName());
                 if (subscription.getPassword().equals(DigestUtils.md5Hex(subscriptionLoginDto.getPassword()))) {
-                    String code = "MyOwnCode-" + subscription.getUserName(); //TODO!!!
-                    LoggedInUser user = new LoggedInUser(0, subscription, code, LocalDateTime.now().plusDays(7));
+                    String code = java.util.UUID.randomUUID().toString();
+                    LoggedInUser user = new LoggedInUser(0, subscription, code, LocalDateTime.now().plusDays(1));
                     loggedInUserService.saveLoggedInUser(user);
                     return new ResponseEntity<>(code, HttpStatus.OK);
                 }
