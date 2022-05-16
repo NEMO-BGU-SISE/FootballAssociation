@@ -4,10 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Team {
+public class Event {
+
     @Id
     private int Id;
-    private String name;
-
-
 }
