@@ -1,6 +1,6 @@
 package com.nemo.footballassociation.Contracts.Modules.DbModels;
 
-import com.nemo.footballassociation.Contracts.Interfaces.Enums.Position;
+import com.nemo.footballassociation.Contracts.Enums.Position;
 
 import java.util.Date;
 

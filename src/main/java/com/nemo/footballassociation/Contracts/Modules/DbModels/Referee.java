@@ -1,6 +1,6 @@
 package com.nemo.footballassociation.Contracts.Modules.DbModels;
 
-import com.nemo.footballassociation.Contracts.Interfaces.Enums.RefereeTraining;
+import com.nemo.footballassociation.Contracts.Enums.RefereeTraining;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
