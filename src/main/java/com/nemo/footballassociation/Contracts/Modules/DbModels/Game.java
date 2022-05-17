@@ -16,7 +16,7 @@ public class Game {
     @JoinColumn(name = "home_team_id")
     private Team homeTeam;
     @ManyToOne
-    @JoinColumn(name = "home_team_id")
+    @JoinColumn(name = "away_team_id")
     private Team awayTeam;
     @ManyToOne
     @JoinColumn(name = "league_id")
