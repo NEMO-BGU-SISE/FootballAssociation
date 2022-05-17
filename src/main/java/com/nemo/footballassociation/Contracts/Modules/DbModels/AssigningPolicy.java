@@ -9,7 +9,10 @@ public class AssigningPolicy extends APolicy{
     private int id;
     private int numOfMatchesBetweenTeamsInSeason;
 
-    public AssigningPolicy(int numOfMatches) {
+    public AssigningPolicy(int numOfMatches) throws Exception {
+        if(numOfMatches != 1 && numOfMatches != 2){
+            throw new Exception();
+        }
         this.numOfMatchesBetweenTeamsInSeason = numOfMatches;
     }
 
