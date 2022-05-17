@@ -1,6 +1,5 @@
 package com.nemo.footballassociation.Contracts.Modules.DbModels;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.time.LocalDate;
@@ -8,7 +7,7 @@ import java.time.LocalDate;
 @Entity
 public class Season {
     @Id
-    private int Id;
+    private int id;
     private LocalDate startDate;
     private LocalDate endDate;
 
@@ -16,17 +15,17 @@ public class Season {
     }
 
     public Season(int id, LocalDate startDate, LocalDate endDate) {
-        Id = id;
+        this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
     }
 
     public LocalDate getStartDate() {
