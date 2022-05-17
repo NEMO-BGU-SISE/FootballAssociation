@@ -7,5 +7,5 @@ import javax.persistence.Id;
 public class Event {
 
     @Id
-    private int Id;
+    private int id;
 }

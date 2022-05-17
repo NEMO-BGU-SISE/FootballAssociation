@@ -17,6 +17,6 @@ public interface ILeagueBySeasonRepository extends JpaRepository<LeagueBySeason,
     public boolean existsByLeagueIdAndSeasonId(int leagueId, int seasonId);
     public boolean existsById(int Id);
 
-    @Query("select max(s.Id) from LeagueBySeason s")
+    @Query("select max(s.id) from LeagueBySeason s")
     public Integer findMaxId();
 }

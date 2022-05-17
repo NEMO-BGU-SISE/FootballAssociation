@@ -8,7 +8,7 @@ import java.util.*;
 @Entity
 public class LeagueBySeason {
     @Id
-    private int Id;
+    private int id;
     @ManyToOne
 //    @JoinColumn(name="season_id")
     private Season season;
@@ -37,11 +37,11 @@ public class LeagueBySeason {
     }
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
     }
 
     public List<TeamByLeagueBySeason> getTeams() {

@@ -1,13 +1,11 @@
 package com.nemo.footballassociation.Contracts.Modules.DbModels;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class League {
     @Id
-    private int Id;
+    private int id;
 
     private String name;
 
@@ -19,11 +17,11 @@ public class League {
     }
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getName() {

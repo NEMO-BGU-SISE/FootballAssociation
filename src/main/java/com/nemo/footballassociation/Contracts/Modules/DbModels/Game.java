@@ -7,7 +7,7 @@ import java.util.List;
 @Entity
 public class Game {
     @Id
-    private int Id;
+    private int id;
     private Date dateTime;
     private int homeScore;
     private int awayScore;
@@ -19,7 +19,7 @@ public class Game {
     private List<Event> events;
 
     public Game(int id, Date dateTime, List<Event> events) {
-        Id = id;
+        this.id = id;
         this.dateTime = dateTime;
         this.events = events;
     }
@@ -30,11 +30,11 @@ public class Game {
 
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
     }
 
     public Date getDateTime() {

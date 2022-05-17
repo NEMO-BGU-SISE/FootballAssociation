@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 @Entity
 public class LoggedInUser {
     @Id
-    private int Id;
+    private int id;
     @OneToOne
     @JoinColumn(name = "subscriptionId")
     private Subscription subscription;
@@ -17,18 +17,18 @@ public class LoggedInUser {
     }
 
     public LoggedInUser(int id, Subscription subscription, String code, LocalDateTime expiredDateTime) {
-        this.Id = id;
+        this.id = id;
         this.subscription = subscription;
         this.code = code;
         this.expiredDateTime = expiredDateTime;
     }
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
-        this.Id = id;
+        this.id = id;
     }
 
     public Subscription getSubscription() {

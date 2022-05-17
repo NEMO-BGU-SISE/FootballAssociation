@@ -13,6 +13,6 @@ public interface ISeasonRepository extends JpaRepository<Season, Integer> {
 
     public boolean existsById(int Id);
 
-    @Query("select max(s.Id) from Season s")
+    @Query("select max(s.id) from Season s")
     public Integer findMaxId();
 }

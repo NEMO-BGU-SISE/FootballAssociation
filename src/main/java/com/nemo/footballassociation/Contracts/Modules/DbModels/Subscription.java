@@ -6,9 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-//@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Subscription {
-
     @Id
     private int id;
     protected String name;
