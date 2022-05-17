@@ -9,41 +9,25 @@ public class Game {
     @Id
     private int Id;
     private Date dateTime;
-    private String field;
     private int homeScore;
     private int awayScore;
     @ManyToOne
-    @JoinColumn(name = "home_team_id")
-    private Team homeTeam;
+    private TeamByLeagueBySeason homeTeam;
     @ManyToOne
-    @JoinColumn(name = "away_team_id")
-    private Team awayTeam;
-    @ManyToOne
-    @JoinColumn(name = "league_id")
-    private League league;
-    @ManyToOne
-    @JoinColumn(name = "season_id")
-    private Season season;
-
+    private TeamByLeagueBySeason awayTeam;
     @ManyToMany
-    @JoinColumn(name = "event_id")
     private List<Event> events;
 
-    public Game(Date dateTime, String field, int homeScore, int awayScore, Team homeTeam, Team awayTeam, League league, Season season, List<Event> events) {
+    public Game(int id, Date dateTime, List<Event> events) {
+        Id = id;
         this.dateTime = dateTime;
-        this.field = field;
-        this.homeScore = homeScore;
-        this.awayScore = awayScore;
-        this.homeTeam = homeTeam;
-        this.awayTeam = awayTeam;
-        this.league = league;
-        this.season = season;
         this.events = events;
     }
 
     public Game() {
 
     }
+
 
     public int getId() {
         return Id;
@@ -59,14 +43,6 @@ public class Game {
 
     public void setDateTime(Date dateTime) {
         this.dateTime = dateTime;
-    }
-
-    public String getField() {
-        return field;
-    }
-
-    public void setField(String field) {
-        this.field = field;
     }
 
     public int getHomeScore() {
@@ -85,36 +61,20 @@ public class Game {
         this.awayScore = awayScore;
     }
 
-    public Team getHomeTeam() {
+    public TeamByLeagueBySeason getHomeTeam() {
         return homeTeam;
     }
 
-    public void setHomeTeam(Team homeTeam) {
+    public void setHomeTeam(TeamByLeagueBySeason homeTeam) {
         this.homeTeam = homeTeam;
     }
 
-    public Team getAwayTeam() {
+    public TeamByLeagueBySeason getAwayTeam() {
         return awayTeam;
     }
 
-    public void setAwayTeam(Team awayTeam) {
+    public void setAwayTeam(TeamByLeagueBySeason awayTeam) {
         this.awayTeam = awayTeam;
-    }
-
-    public League getLeague() {
-        return league;
-    }
-
-    public void setLeague(League league) {
-        this.league = league;
-    }
-
-    public Season getSeason() {
-        return season;
-    }
-
-    public void setSeason(Season season) {
-        this.season = season;
     }
 
     public List<Event> getEvents() {
@@ -124,4 +84,5 @@ public class Game {
     public void setEvents(List<Event> events) {
         this.events = events;
     }
+
 }

@@ -11,29 +11,11 @@ public class League {
 
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "season_id")
-    private Season season;
-
-    @ManyToMany
-    @JoinColumn(name = "games_id")
-    private List<Game> games;
-
-    public Season getSeason() {
-        return season;
-    }
-
-    public void setSeason(Season season) {
-        this.season = season;
-    }
-
     public League() {
     }
 
-    public League(String name, Season season) {
+    public League(String name) {
         this.name = name;
-        this.season = season;
-        this.games = new ArrayList<>();
     }
 
     public int getId() {
@@ -50,13 +32,5 @@ public class League {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Game> getAllGames() {
-        return games;
-    }
-
-    public void setAllGames(List<Game> allGames) {
-        this.games = allGames;
     }
 }
