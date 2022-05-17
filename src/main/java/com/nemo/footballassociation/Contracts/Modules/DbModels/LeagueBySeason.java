@@ -8,10 +8,10 @@ public class LeagueBySeason {
     @Id
     private int Id;
     @ManyToOne
-    @JoinColumn(name="season_id")
+    @JoinColumn(name = "season_id")
     private Season season;
     @ManyToOne
-    @JoinColumn(name="league_id")
+    @JoinColumn(name = "league_id")
     private League league;
     @OneToMany
     private List<Game> games;
@@ -19,6 +19,17 @@ public class LeagueBySeason {
     private List<TeamByLeagueBySeason> teams;
     @ManyToOne
     private AssigningPolicy assigningPolicy;
+
+    public LeagueBySeason() {
+    }
+
+    public void update(LeagueBySeason other) {
+        this.setSeason(other.getSeason());
+        this.setLeague(other.getLeague());
+        this.setGames(other.getGames());
+        this.setTeams(other.getTeams());
+        this.setAssigningPolicy(other.getAssigningPolicy());
+    }
 
     public int getId() {
         return Id;
