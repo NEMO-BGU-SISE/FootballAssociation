@@ -3,6 +3,7 @@ package com.nemo.footballassociation.API.controller;
 import com.nemo.footballassociation.Contracts.Interfaces.Service.ILoggedInUserService;
 import com.nemo.footballassociation.Contracts.Modules.DbModels.Referee;
 import com.nemo.footballassociation.Contracts.Interfaces.Service.IRefereeService;
+import com.nemo.footballassociation.Contracts.Modules.DtoModels.RefereeCreateDto;
 import com.nemo.footballassociation.Service.LoggedInUserService;
 import com.nemo.footballassociation.Service.RefereeService;
 import org.springframework.http.HttpHeaders;
@@ -28,7 +29,7 @@ public class RefereeController {
 
     // build create Referee REST API
     @PostMapping
-    public ResponseEntity<Referee> saveReferee(@RequestHeader("Authorization") String code, @RequestBody Referee referee) {
+    public ResponseEntity<Referee> saveReferee(@RequestHeader("Authorization") String code, @RequestBody RefereeCreateDto referee) {
         try {
             if (!loggedInUserService.isRepresentativeOfTheAssociation(code)) {
                 return new ResponseEntity("You are not authorized for this", HttpStatus.UNAUTHORIZED);
@@ -43,8 +44,8 @@ public class RefereeController {
             }
             String md5Password = DigestUtils.md5Hex(referee.getPassword());
             referee.setPassword(md5Password);
-
-            return new ResponseEntity<>(refereeService.saveReferee(referee), HttpStatus.CREATED);
+            Referee refereeToSave = new Referee(referee.getName(), referee.getUserName(), referee.getPassword(), referee.getRefereeTraining());
+            return new ResponseEntity<>(refereeService.saveReferee(refereeToSave), HttpStatus.CREATED);
         } catch (Exception ex) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
