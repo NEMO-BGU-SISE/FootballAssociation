@@ -22,6 +22,8 @@ public class LeagueBySeason {
     @ManyToOne
     private AssigningPolicy assigningPolicy;
 
+    private boolean isAssigned = false;
+
     public LeagueBySeason() {
     }
 
@@ -31,10 +33,9 @@ public class LeagueBySeason {
         this.setGames(other.getGames());
         this.setTeams(other.getTeams());
         this.setAssigningPolicy(other.getAssigningPolicy());
-
+        this.setAssigned(other.isAssigned());
     }
 
-    @Id
     public int getId() {
         return Id;
     }
@@ -83,20 +84,28 @@ public class LeagueBySeason {
         this.games = games;
     }
 
+    public boolean isAssigned() {
+        return isAssigned;
+    }
+
+    public void setAssigned(boolean assigned) {
+        isAssigned = assigned;
+    }
+
     public boolean AssigningGames() {
-        if (this.assigningPolicy == null || this.isAssigned || this.teams.size() < 2 || this.season == null || this.league == null){
+        if (this.assigningPolicy == null || this.isAssigned || this.teams.size() < 2 || this.season == null || this.league == null) {
             return false;
         }
-        if(this.assigningPolicy.getNumOfMatchesBetweenTeamsInSeason() == 1) {
+        if (this.assigningPolicy.getNumOfMatchesBetweenTeamsInSeason() == 1) {
             int numOfGames1 = (this.factorial(this.teams.size()) / (this.factorial(this.teams.size() - 2) * (this.factorial(2))));
             if (numOfGames1 != this.games.size()) {
                 return false;
             }
             Game curGame;
             int index = 0;
-            for (TeamByLeagueBySeason teamHome: this.teams){
-                for (TeamByLeagueBySeason teamAway: this.teams){
-                    if(teamHome == teamAway){
+            for (TeamByLeagueBySeason teamHome : this.teams) {
+                for (TeamByLeagueBySeason teamAway : this.teams) {
+                    if (teamHome == teamAway) {
                         continue;
                     }
                     curGame = this.games.get(index++);
@@ -104,17 +113,16 @@ public class LeagueBySeason {
                     curGame.setHomeTeam(teamHome);
                 }
             }
-        }
-        else if(this.assigningPolicy.getNumOfMatchesBetweenTeamsInSeason() == 2) {
+        } else if (this.assigningPolicy.getNumOfMatchesBetweenTeamsInSeason() == 2) {
             int numOfGames2 = (this.factorial(this.teams.size()) / (this.factorial(this.teams.size() - 2)));
             if (numOfGames2 != this.games.size()) {
                 return false;
             }
             Game curGame;
             int index = 0;
-            for (TeamByLeagueBySeason teamHome: this.teams){
-                for (TeamByLeagueBySeason teamAway: this.teams){
-                    if(teamHome == teamAway){
+            for (TeamByLeagueBySeason teamHome : this.teams) {
+                for (TeamByLeagueBySeason teamAway : this.teams) {
+                    if (teamHome == teamAway) {
                         continue;
                     }
                     curGame = this.games.get(index++);
@@ -139,7 +147,7 @@ public class LeagueBySeason {
         int numOfGames = this.games.size() - 1;
         Random rand = new Random();
         Date curDate;
-        for (Game game: this.games){
+        for (Game game : this.games) {
             int randomNumber = rand.nextInt(numOfGames--);
             curDate = dates.get(randomNumber);
             game.setDateTime(curDate);
@@ -161,16 +169,16 @@ public class LeagueBySeason {
     }
 
     public List<Date> getDateRange(Date start, Date end) {
-        if(start == null || end == null || end.before(start)){
+        if (start == null || end == null || end.before(start)) {
             return null;
         }
         List<Date> ret = new ArrayList<Date>();
         Date curDate = start;
         Calendar cal = Calendar.getInstance();
-        while(curDate.before(end) || curDate.equals(end)) {
+        while (curDate.before(end) || curDate.equals(end)) {
             ret.add(curDate);
-            cal.setTime (curDate);
-            cal.add (Calendar.DATE, 7);
+            cal.setTime(curDate);
+            cal.add(Calendar.DATE, 7);
             curDate = cal.getTime();
         }
         return ret;

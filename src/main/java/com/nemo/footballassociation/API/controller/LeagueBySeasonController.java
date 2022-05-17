@@ -35,8 +35,7 @@ public class LeagueBySeasonController {
                 return new ResponseEntity("invalid couple of league and season ids", HttpStatus.BAD_REQUEST);
             }
             LeagueBySeason leagueBySeason = leagueBySeasonService.getLBSByIds(leagueId, seasonId);
-            leagueBySeason;
-
+            leagueBySeason.AssigningGames();
             return new ResponseEntity<>(leagueBySeasonService.saveLBS(leagueBySeason), HttpStatus.CREATED);
         } catch (Exception ex) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
