@@ -1,4 +1,4 @@
-package com.nemo.footballassociation.Contracts.Modules.DbModels;
+package com.nemo.footballassociation.Contracts.Interfaces.Enums;
 
 public enum Position {
     Goalkeeper, Defender, Striker, Midfielder

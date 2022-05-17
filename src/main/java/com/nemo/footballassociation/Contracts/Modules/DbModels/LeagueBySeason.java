@@ -8,10 +8,10 @@ public class LeagueBySeason {
     @Id
     private int Id;
     @ManyToOne
-//    @JoinColumn(name="season_id")
+    @JoinColumn(name="season_id")
     private Season season;
     @ManyToOne
-//    @JoinColumn(name="league_id")
+    @JoinColumn(name="league_id")
     private League league;
     @OneToMany
     private List<Game> games;
@@ -20,13 +20,28 @@ public class LeagueBySeason {
     @ManyToOne
     private AssigningPolicy assigningPolicy;
 
-    public void setId(int id) {
-        this.Id = id;
-    }
-
-    @Id
     public int getId() {
         return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
+    }
+
+    public List<TeamByLeagueBySeason> getTeams() {
+        return teams;
+    }
+
+    public void setTeams(List<TeamByLeagueBySeason> teams) {
+        this.teams = teams;
+    }
+
+    public AssigningPolicy getAssigningPolicy() {
+        return assigningPolicy;
+    }
+
+    public void setAssigningPolicy(AssigningPolicy assigningPolicy) {
+        this.assigningPolicy = assigningPolicy;
     }
 
     public Season getSeason() {
