@@ -25,7 +25,7 @@ public class LeagueBySeasonController {
     }
 
     // build create LeagueBySeason REST API
-    @PostMapping("{league_id, season_id}")
+    @PostMapping("{league_id}{season_id}")
     public ResponseEntity<LeagueBySeason> saveLeagueBySeason(@RequestHeader("Authorization") String code, @PathVariable("league_id") int leagueId, @PathVariable("season_id") int seasonId) {
         try {
             if (!loggedInUserService.isRepresentativeOfTheAssociation(code)) {
