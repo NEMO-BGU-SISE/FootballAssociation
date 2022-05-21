@@ -2,7 +2,7 @@ package com.nemo.footballassociation.Contracts.Modules.DtoModels;
 
 import com.nemo.footballassociation.Contracts.Enums.RefereeTraining;
 
-public class RefereeCreateDto {
+public class RefereeUpsertDto {
     private String name;
     private String userName;
     private String password;

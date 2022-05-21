@@ -3,10 +3,9 @@ package com.nemo.footballassociation.API.controller;
 import com.nemo.footballassociation.Contracts.Interfaces.Service.ILoggedInUserService;
 import com.nemo.footballassociation.Contracts.Modules.DbModels.Referee;
 import com.nemo.footballassociation.Contracts.Interfaces.Service.IRefereeService;
-import com.nemo.footballassociation.Contracts.Modules.DtoModels.RefereeCreateDto;
+import com.nemo.footballassociation.Contracts.Modules.DtoModels.RefereeUpsertDto;
 import com.nemo.footballassociation.Service.LoggedInUserService;
 import com.nemo.footballassociation.Service.RefereeService;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +28,7 @@ public class RefereeController {
 
     // build create Referee REST API
     @PostMapping
-    public ResponseEntity<Referee> saveReferee(@RequestHeader("Authorization") String code, @RequestBody RefereeCreateDto referee) {
+    public ResponseEntity<Referee> saveReferee(@RequestHeader("Authorization") String code, @RequestBody RefereeUpsertDto referee) {
         try {
             if (!loggedInUserService.isRepresentativeOfTheAssociation(code)) {
                 return new ResponseEntity("You are not authorized for this", HttpStatus.UNAUTHORIZED);
@@ -81,12 +80,14 @@ public class RefereeController {
     // build update referee REST API
     // http://localhost:8080/api/referees/1
     @PutMapping("{id}")
-    public ResponseEntity<Referee> updateReferee(@RequestHeader("Authorization") String code, @PathVariable("id") int id, @RequestBody Referee referee) {
+    public ResponseEntity<Referee> updateReferee(@RequestHeader("Authorization") String code, @PathVariable("id") int id, @RequestBody RefereeUpsertDto referee) {
         try {
             if (!loggedInUserService.isRepresentativeOfTheAssociation(code)) {
                 return new ResponseEntity("You are not authorized for this", HttpStatus.UNAUTHORIZED);
             }
-            return new ResponseEntity<Referee>(refereeService.updateReferee(referee, id), HttpStatus.OK);
+
+            Referee refereeToUpdate = new Referee(referee.getName(), referee.getUserName(), referee.getPassword(), referee.getRefereeTraining());
+            return new ResponseEntity<>(refereeService.updateReferee(refereeToUpdate, id), HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
