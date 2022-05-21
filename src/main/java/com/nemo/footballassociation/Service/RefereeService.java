@@ -53,6 +53,11 @@ public class RefereeService implements IRefereeService {
     }
 
     @Override
+    public boolean existsById(int id){
+        return refereeRepository.existsById(id);
+    }
+
+    @Override
     public Referee updateReferee(Referee referee, int id) throws Exception {
 
         // we need to check whether referee with given id is exist in DB or not

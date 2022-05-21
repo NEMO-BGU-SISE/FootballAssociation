@@ -9,7 +9,8 @@ public interface IRefereeService {
     List<Referee> getAllReferee();
     Referee getRefereeById(int id) throws Exception;
     Referee getRefereeByUserName(String userName) throws Exception;
-    boolean existsByUserName(String userName) throws Exception;
+    boolean existsByUserName(String userName);
+    boolean existsById(int id);
     Referee updateReferee(Referee referee, int id) throws Exception;
     void deleteReferee(int id) throws Exception;
 }

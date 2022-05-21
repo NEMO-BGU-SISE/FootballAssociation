@@ -3,7 +3,8 @@ package com.nemo.footballassociation.API.controller;
 import com.nemo.footballassociation.Contracts.Interfaces.Service.ILoggedInUserService;
 import com.nemo.footballassociation.Contracts.Modules.DbModels.Referee;
 import com.nemo.footballassociation.Contracts.Interfaces.Service.IRefereeService;
-import com.nemo.footballassociation.Contracts.Modules.DtoModels.RefereeUpsertDto;
+import com.nemo.footballassociation.Contracts.Modules.DtoModels.RefereeInsertDto;
+import com.nemo.footballassociation.Contracts.Modules.DtoModels.RefereeUpdateDto;
 import com.nemo.footballassociation.Service.LoggedInUserService;
 import com.nemo.footballassociation.Service.RefereeService;
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,7 @@ public class RefereeController {
 
     // build create Referee REST API
     @PostMapping
-    public ResponseEntity<Referee> saveReferee(@RequestHeader("Authorization") String code, @RequestBody RefereeUpsertDto referee) {
+    public ResponseEntity<Referee> saveReferee(@RequestHeader("Authorization") String code, @RequestBody RefereeInsertDto referee) {
         try {
             if (!loggedInUserService.isRepresentativeOfTheAssociation(code)) {
                 return new ResponseEntity("You are not authorized for this", HttpStatus.UNAUTHORIZED);
@@ -77,21 +78,27 @@ public class RefereeController {
         }
     }
 
-    // build update referee REST API
-    // http://localhost:8080/api/referees/1
-    @PutMapping("{id}")
-    public ResponseEntity<Referee> updateReferee(@RequestHeader("Authorization") String code, @PathVariable("id") int id, @RequestBody RefereeUpsertDto referee) {
-        try {
-            if (!loggedInUserService.isRepresentativeOfTheAssociation(code)) {
-                return new ResponseEntity("You are not authorized for this", HttpStatus.UNAUTHORIZED);
-            }
-
-            Referee refereeToUpdate = new Referee(referee.getName(), referee.getUserName(), referee.getPassword(), referee.getRefereeTraining());
-            return new ResponseEntity<>(refereeService.updateReferee(refereeToUpdate, id), HttpStatus.OK);
-        } catch (Exception ex) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+//    // build update referee REST API
+//    // http://localhost:8080/api/referees/1
+//    @PutMapping("{id}")
+//    public ResponseEntity<Referee> updateReferee(@RequestHeader("Authorization") String code, @PathVariable("id") int id, @RequestBody RefereeUpdateDto referee) {
+//        try {
+//            if (!loggedInUserService.isRepresentativeOfTheAssociation(code)) {
+//                return new ResponseEntity("You are not authorized for this", HttpStatus.UNAUTHORIZED);
+//            }
+//            if (!refereeService.existsById(id)) {
+//                return new ResponseEntity("referee id doesn't exists", HttpStatus.BAD_REQUEST);
+//            }
+//            Referee refereeToUpdate = refereeService.getRefereeById(id);
+//
+//            refereeToUpdate.setName(referee.getName());
+//            refereeToUpdate.setPassword(referee.getPassword());
+//            refereeToUpdate.setRefereeTraining(referee.getRefereeTraining());
+//            return new ResponseEntity<>(refereeService.updateReferee(refereeToUpdate, id), HttpStatus.OK);
+//        } catch (Exception ex) {
+//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
 
     // build delete referee REST API
     // http://localhost:8080/api/referees/1
