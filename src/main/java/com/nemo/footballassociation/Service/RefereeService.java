@@ -42,8 +42,9 @@ public class RefereeService implements IRefereeService {
     }
 
     @Override
-    public Referee getRefereeByUserName(String userName) {
-        return refereeRepository.findByUserName(userName);
+    public Referee getRefereeByUserName(String userName) throws Exception {
+        return refereeRepository.findByUserName(userName).orElseThrow(() ->
+                new Exception(""));
     }
 
     @Override

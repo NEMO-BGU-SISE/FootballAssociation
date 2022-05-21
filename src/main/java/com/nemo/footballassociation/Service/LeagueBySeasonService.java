@@ -45,7 +45,8 @@ public class LeagueBySeasonService implements ILeagueBySeasonService {
     public LeagueBySeason updateLBS(LeagueBySeason league, int id) throws Exception {
         if (leagueBySeasonRepository.existsById(id)) {
             try {
-                LeagueBySeason lbsToBeUpdate = leagueBySeasonRepository.findById(id);
+                LeagueBySeason lbsToBeUpdate = leagueBySeasonRepository.findById(id).orElseThrow(() ->
+                        new Exception(""));
                 lbsToBeUpdate.update(league);
                 leagueBySeasonRepository.save(lbsToBeUpdate);
                 return lbsToBeUpdate;

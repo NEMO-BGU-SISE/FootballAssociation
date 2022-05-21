@@ -5,11 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
 public interface IGameRepository extends JpaRepository<Game, Integer> {
-    public List<Game> findById(int id);
 
     public boolean existsById(int id);
 
