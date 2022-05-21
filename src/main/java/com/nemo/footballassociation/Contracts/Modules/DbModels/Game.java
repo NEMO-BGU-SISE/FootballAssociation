@@ -8,19 +8,19 @@ import java.util.List;
 public class Game {
     @Id
     private int id;
-    private Date dateTime;
-    private int homeScore;
-    private int awayScore;
+    private Date date_time;
+    private int home_score;
+    private int away_score;
     @ManyToOne
-    private TeamByLeagueBySeason homeTeam;
+    private TeamByLeagueBySeason home_team;
     @ManyToOne
-    private TeamByLeagueBySeason awayTeam;
+    private TeamByLeagueBySeason away_team;
     @ManyToMany
     private List<Event> events;
 
-    public Game(int id, Date dateTime, List<Event> events) {
+    public Game(int id, Date date_time, List<Event> events) {
         this.id = id;
-        this.dateTime = dateTime;
+        this.date_time = date_time;
         this.events = events;
     }
 
@@ -37,44 +37,44 @@ public class Game {
         this.id = id;
     }
 
-    public Date getDateTime() {
-        return dateTime;
+    public Date getDate_time() {
+        return date_time;
     }
 
-    public void setDateTime(Date dateTime) {
-        this.dateTime = dateTime;
+    public void setDate_time(Date date_time) {
+        this.date_time = date_time;
     }
 
-    public int getHomeScore() {
-        return homeScore;
+    public int getHome_score() {
+        return home_score;
     }
 
-    public void setHomeScore(int homeScore) {
-        this.homeScore = homeScore;
+    public void setHome_score(int homeScore) {
+        this.home_score = homeScore;
     }
 
-    public int getAwayScore() {
-        return awayScore;
+    public int getAway_score() {
+        return away_score;
     }
 
-    public void setAwayScore(int awayScore) {
-        this.awayScore = awayScore;
+    public void setAway_score(int awayScore) {
+        this.away_score = awayScore;
     }
 
-    public TeamByLeagueBySeason getHomeTeam() {
-        return homeTeam;
+    public TeamByLeagueBySeason getHome_team() {
+        return home_team;
     }
 
-    public void setHomeTeam(TeamByLeagueBySeason homeTeam) {
-        this.homeTeam = homeTeam;
+    public void setHome_team(TeamByLeagueBySeason homeTeam) {
+        this.home_team = homeTeam;
     }
 
-    public TeamByLeagueBySeason getAwayTeam() {
-        return awayTeam;
+    public TeamByLeagueBySeason getAway_team() {
+        return away_team;
     }
 
-    public void setAwayTeam(TeamByLeagueBySeason awayTeam) {
-        this.awayTeam = awayTeam;
+    public void setAway_team(TeamByLeagueBySeason awayTeam) {
+        this.away_team = awayTeam;
     }
 
     public List<Event> getEvents() {

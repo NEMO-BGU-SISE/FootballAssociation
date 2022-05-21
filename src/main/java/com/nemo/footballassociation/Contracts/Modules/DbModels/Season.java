@@ -8,16 +8,16 @@ import java.time.LocalDate;
 public class Season {
     @Id
     private int id;
-    private LocalDate startDate;
-    private LocalDate endDate;
+    private LocalDate start_date;
+    private LocalDate end_date;
 
     public Season() {
     }
 
-    public Season(int id, LocalDate startDate, LocalDate endDate) {
+    public Season(int id, LocalDate start_date, LocalDate end_date) {
         this.id = id;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.start_date = start_date;
+        this.end_date = end_date;
     }
 
     public int getId() {
@@ -28,19 +28,19 @@ public class Season {
         this.id = id;
     }
 
-    public LocalDate getStartDate() {
-        return startDate;
+    public LocalDate getStart_date() {
+        return start_date;
     }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
+    public void setStart_date(LocalDate startDate) {
+        this.start_date = startDate;
     }
 
-    public LocalDate getEndDate() {
-        return endDate;
+    public LocalDate getEnd_date() {
+        return end_date;
     }
 
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
+    public void setEnd_date(LocalDate endDate) {
+        this.end_date = endDate;
     }
 }

@@ -14,15 +14,15 @@ public class TeamByLeagueBySeason {
     @ManyToOne
     private Team team;
     @ManyToOne
-    private LeagueBySeason leagueBySeason;
+    private LeagueBySeason league_by_season;
 
     @OneToMany
     private List<Game> games;
 
-    public TeamByLeagueBySeason(int id, Team team, LeagueBySeason leagueBySeason, List<Game> games) {
+    public TeamByLeagueBySeason(int id, Team team, LeagueBySeason league_by_season, List<Game> games) {
         this.id = id;
         this.team = team;
-        this.leagueBySeason = leagueBySeason;
+        this.league_by_season = league_by_season;
         this.games = games;
     }
 
@@ -38,12 +38,12 @@ public class TeamByLeagueBySeason {
         this.team = team;
     }
 
-    public LeagueBySeason getLeagueBySeason() {
-        return leagueBySeason;
+    public LeagueBySeason getLeague_by_season() {
+        return league_by_season;
     }
 
-    public void setLeagueBySeason(LeagueBySeason leagueBySeason) {
-        this.leagueBySeason = leagueBySeason;
+    public void setLeague_by_season(LeagueBySeason leagueBySeason) {
+        this.league_by_season = leagueBySeason;
     }
 
     public List<Game> getGames() {

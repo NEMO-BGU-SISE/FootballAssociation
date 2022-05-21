@@ -11,16 +11,16 @@ public class LoggedInUser {
     @JoinColumn(name = "subscriptionId")
     private Subscription subscription;
     private String code;
-    private LocalDateTime expiredDateTime;
+    private LocalDateTime expired_date_time;
 
     public LoggedInUser() {
     }
 
-    public LoggedInUser(int id, Subscription subscription, String code, LocalDateTime expiredDateTime) {
+    public LoggedInUser(int id, Subscription subscription, String code, LocalDateTime expired_date_time) {
         this.id = id;
         this.subscription = subscription;
         this.code = code;
-        this.expiredDateTime = expiredDateTime;
+        this.expired_date_time = expired_date_time;
     }
 
     public int getId() {
@@ -47,11 +47,11 @@ public class LoggedInUser {
         this.code = code;
     }
 
-    public LocalDateTime getExpiredDateTime() {
-        return expiredDateTime;
+    public LocalDateTime getExpired_date_time() {
+        return expired_date_time;
     }
 
-    public void setExpiredDateTime(LocalDateTime expiredDateTime) {
-        this.expiredDateTime = expiredDateTime;
+    public void setExpired_date_time(LocalDateTime expiredDateTime) {
+        this.expired_date_time = expiredDateTime;
     }
 }

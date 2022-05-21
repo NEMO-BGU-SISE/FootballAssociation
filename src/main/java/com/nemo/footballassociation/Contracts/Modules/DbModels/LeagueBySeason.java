@@ -20,7 +20,7 @@ public class LeagueBySeason {
     @OneToMany
     private List<TeamByLeagueBySeason> teams;
     @ManyToOne
-    private AssigningPolicy assigningPolicy;
+    private AssigningPolicy assigning_policy;
 
     private boolean isAssigned = false;
 
@@ -32,7 +32,7 @@ public class LeagueBySeason {
         this.setLeague(other.getLeague());
         this.setGames(other.getGames());
         this.setTeams(other.getTeams());
-        this.setAssigningPolicy(other.getAssigningPolicy());
+        this.setAssigning_policy(other.getAssigning_policy());
         this.setAssigned(other.isAssigned());
     }
 
@@ -52,12 +52,12 @@ public class LeagueBySeason {
         this.teams = teams;
     }
 
-    public AssigningPolicy getAssigningPolicy() {
-        return assigningPolicy;
+    public AssigningPolicy getAssigning_policy() {
+        return assigning_policy;
     }
 
-    public void setAssigningPolicy(AssigningPolicy assigningPolicy) {
-        this.assigningPolicy = assigningPolicy;
+    public void setAssigning_policy(AssigningPolicy assigningPolicy) {
+        this.assigning_policy = assigningPolicy;
     }
 
     public Season getSeason() {
@@ -93,10 +93,10 @@ public class LeagueBySeason {
     }
 
     public boolean AssigningGames() {
-        if (this.assigningPolicy == null || this.isAssigned || this.teams.size() < 2 || this.season == null || this.league == null) {
+        if (this.assigning_policy == null || this.isAssigned || this.teams.size() < 2 || this.season == null || this.league == null) {
             return false;
         }
-        if (this.assigningPolicy.getNumOfMatchesBetweenTeamsInSeason() == 1) {
+        if (this.assigning_policy.getNumOfMatchesBetweenTeamsInSeason() == 1) {
             int numOfGames1 = (this.factorial(this.teams.size()) / (this.factorial(this.teams.size() - 2) * (this.factorial(2))));
             if (numOfGames1 != this.games.size()) {
                 return false;
@@ -109,11 +109,11 @@ public class LeagueBySeason {
                         continue;
                     }
                     curGame = this.games.get(index++);
-                    curGame.setAwayTeam(teamAway);
-                    curGame.setHomeTeam(teamHome);
+                    curGame.setAway_team(teamAway);
+                    curGame.setHome_team(teamHome);
                 }
             }
-        } else if (this.assigningPolicy.getNumOfMatchesBetweenTeamsInSeason() == 2) {
+        } else if (this.assigning_policy.getNumOfMatchesBetweenTeamsInSeason() == 2) {
             int numOfGames2 = (this.factorial(this.teams.size()) / (this.factorial(this.teams.size() - 2)));
             if (numOfGames2 != this.games.size()) {
                 return false;
@@ -126,11 +126,11 @@ public class LeagueBySeason {
                         continue;
                     }
                     curGame = this.games.get(index++);
-                    curGame.setAwayTeam(teamAway);
-                    curGame.setHomeTeam(teamHome);
+                    curGame.setAway_team(teamAway);
+                    curGame.setHome_team(teamHome);
                     curGame = this.games.get(index++);
-                    curGame.setAwayTeam(teamHome);
-                    curGame.setHomeTeam(teamAway);
+                    curGame.setAway_team(teamHome);
+                    curGame.setHome_team(teamAway);
                 }
             }
         }
@@ -150,7 +150,7 @@ public class LeagueBySeason {
         for (Game game : this.games) {
             int randomNumber = rand.nextInt(numOfGames--);
             curDate = dates.get(randomNumber);
-            game.setDateTime(curDate);
+            game.setDate_time(curDate);
             dates.remove(randomNumber);
         }
         return true;

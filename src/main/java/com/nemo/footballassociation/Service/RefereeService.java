@@ -59,7 +59,7 @@ public class RefereeService implements IRefereeService {
                 () -> new Exception("Referee"));
 
         existingReferee.setName(referee.getName());
-        existingReferee.setUserName(referee.getUserName());
+        existingReferee.setUser_name(referee.getUser_name());
         existingReferee.setPassword(referee.getPassword());
         // save existing referee to DB
         refereeRepository.save(existingReferee);

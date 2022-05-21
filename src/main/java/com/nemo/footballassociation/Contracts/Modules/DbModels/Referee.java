@@ -10,22 +10,22 @@ import javax.persistence.Enumerated;
 public class Referee extends Subscription {
 
     @Enumerated(value = EnumType.STRING)
-    private RefereeTraining refereeTraining;
+    private RefereeTraining referee_training;
 
     public Referee() {
     }
 
-    public Referee(String name, String userName, String password, RefereeTraining refereeTraining) {
+    public Referee(String name, String userName, String password, RefereeTraining referee_training) {
         super(name, userName, password);
-        this.refereeTraining = refereeTraining;
+        this.referee_training = referee_training;
     }
 
 
-    public RefereeTraining getRefereeTraining() {
-        return refereeTraining;
+    public RefereeTraining getReferee_training() {
+        return referee_training;
     }
 
-    public void setRefereeTraining(RefereeTraining refereeTraining) {
-        this.refereeTraining = refereeTraining;
+    public void setReferee_training(RefereeTraining refereeTraining) {
+        this.referee_training = refereeTraining;
     }
 }

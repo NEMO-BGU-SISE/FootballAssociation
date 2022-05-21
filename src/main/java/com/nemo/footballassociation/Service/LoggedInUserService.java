@@ -23,7 +23,7 @@ public class LoggedInUserService implements ILoggedInUserService {
         if (!loggedInUserRepository.existsByCode(code)) return false;
         try {
             LoggedInUser loggedInUser = getByCode(code);
-            if (LocalDateTime.now().isAfter(loggedInUser.getExpiredDateTime())) return false;
+            if (LocalDateTime.now().isAfter(loggedInUser.getExpired_date_time())) return false;
             return representativeOfTheAssociationRepository.existsById(loggedInUser.getSubscription().getId());
         } catch (Exception exception) {
             return false;
