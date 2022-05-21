@@ -26,7 +26,7 @@ public class LeagueBySeasonController {
 
     // build create LeagueBySeason REST API
     @PostMapping("{league_id}{season_id}")
-    public ResponseEntity<LeagueBySeason> assigningGames(@RequestHeader("Authorization") String code, @PathVariable("league_id") int leagueId, @PathVariable("season_id") int seasonId) {
+    public ResponseEntity<LeagueBySeason> saveLeagueBySeason(@RequestHeader("Authorization") String code, @PathVariable("league_id") int leagueId, @PathVariable("season_id") int seasonId) {
         try {
             if (!loggedInUserService.isRepresentativeOfTheAssociation(code)) {
                 return new ResponseEntity("You are not authorized for this", HttpStatus.UNAUTHORIZED);
@@ -35,11 +35,8 @@ public class LeagueBySeasonController {
                 return new ResponseEntity("invalid couple of league and season ids", HttpStatus.BAD_REQUEST);
             }
             LeagueBySeason leagueBySeason = leagueBySeasonService.getLBSByIds(leagueId, seasonId);
-            if (leagueBySeason.AssigningGames()) {
-                return new ResponseEntity<>(leagueBySeasonService.saveLBS(leagueBySeason), HttpStatus.CREATED);
-            } else {
-                return new ResponseEntity("Can't assign games", HttpStatus.BAD_REQUEST);
-            }
+            leagueBySeason.AssigningGames();
+            return new ResponseEntity<>(leagueBySeasonService.saveLBS(leagueBySeason), HttpStatus.CREATED);
         } catch (Exception ex) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
