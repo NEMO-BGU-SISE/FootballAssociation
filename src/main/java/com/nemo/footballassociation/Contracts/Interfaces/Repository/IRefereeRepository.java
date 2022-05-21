@@ -9,10 +9,12 @@ import java.util.List;
 
 @Repository
 public interface IRefereeRepository extends JpaRepository<Referee, Integer> {
-    public List<Referee> findByUserName(String userName);
+    public Referee findByUserName(String userName);
 
     public boolean existsByUserName(String userName);
 
     @Query("select max(s.id) from Subscription s")
     public Integer findMaxId();
+
+    public void deleteByUserName(String user_name);
 }

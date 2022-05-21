@@ -64,20 +64,17 @@ public class RefereeController {
         try {
             return new ResponseEntity<Referee>(refereeService.getRefereeById(refereeId), HttpStatus.OK);
         } catch (Exception ex) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity("Referee Id does not exists", HttpStatus.BAD_REQUEST);
         }
     }
 
     @GetMapping("userName/{userName}")
     public ResponseEntity<List<Referee>> getRefereeByUserName(@PathVariable("userName") String refereeUserName) {
         try {
-            List<Referee> referee = refereeService.getRefereeByUserName(refereeUserName);
-            if (referee.size() == 0)
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            else
-                return new ResponseEntity<>(referee, HttpStatus.OK);
+            Referee referee = refereeService.getRefereeByUserName(refereeUserName);
+            return new ResponseEntity(referee, HttpStatus.OK);
         } catch (Exception ex) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity("Referee user name does not exists", HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -103,7 +100,7 @@ public class RefereeController {
             refereeService.deleteReferee(id);
             return new ResponseEntity<String>("Referee deleted successfully!.", HttpStatus.OK);
         } catch (Exception ex) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity("Referee doesn't exists!.", HttpStatus.BAD_REQUEST);
         }
     }
 
