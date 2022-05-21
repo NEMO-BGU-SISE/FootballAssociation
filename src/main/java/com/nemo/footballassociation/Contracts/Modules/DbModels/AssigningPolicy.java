@@ -7,13 +7,13 @@ import javax.persistence.Id;
 public class AssigningPolicy extends APolicy{
     @Id
     private int id;
-    private int num_of_matches_between_teams_in_season;
+    private int numOfMatchesBetweenTeamsInSeason;
 
     public AssigningPolicy(int numOfMatches) throws Exception {
         if(numOfMatches != 1 && numOfMatches != 2){
             throw new Exception();
         }
-        this.num_of_matches_between_teams_in_season = numOfMatches;
+        this.numOfMatchesBetweenTeamsInSeason = numOfMatches;
     }
 
     public AssigningPolicy() {
@@ -21,11 +21,11 @@ public class AssigningPolicy extends APolicy{
     }
 
     public int getNumOfMatchesBetweenTeamsInSeason() {
-        return num_of_matches_between_teams_in_season;
+        return numOfMatchesBetweenTeamsInSeason;
     }
 
     public void setNumOfMatchesBetweenTeamsInSeason(int numOfMatchesBetweenTeamsInSeason) {
-        this.num_of_matches_between_teams_in_season = numOfMatchesBetweenTeamsInSeason;
+        this.numOfMatchesBetweenTeamsInSeason = numOfMatchesBetweenTeamsInSeason;
     }
 
     public void setId(int id) {

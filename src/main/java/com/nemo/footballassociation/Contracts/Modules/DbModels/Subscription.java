@@ -1,5 +1,7 @@
 package com.nemo.footballassociation.Contracts.Modules.DbModels;
 
+import org.hibernate.annotations.Generated;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,12 +10,12 @@ public abstract class Subscription {
     @Id
     private int id;
     protected String name;
-    protected String user_name;
+    protected String userName;
     protected String password;
 
-    public Subscription(String name, String user_name, String password) {
+    public Subscription(String name, String userName, String password) {
         this.name = name;
-        this.user_name = user_name;
+        this.userName = userName;
         this.password = password;
     }
 
@@ -37,12 +39,12 @@ public abstract class Subscription {
         this.name = name;
     }
 
-    public String getUser_name() {
-        return user_name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUser_name(String userName) {
-        this.user_name = userName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -51,5 +53,13 @@ public abstract class Subscription {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean login(String userName, String password) {
+        return true;
+    }
+
+    public boolean logout() {
+        return true;
     }
 }
