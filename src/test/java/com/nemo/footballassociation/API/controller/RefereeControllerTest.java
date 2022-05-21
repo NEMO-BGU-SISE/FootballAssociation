@@ -126,7 +126,8 @@ class RefereeControllerTest {
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
-            String sql = "select * from referee";
+            String sql = "select s.id, s.name, s.user_name, s.password, r.referee_training " +
+                    "from referee r inner join subscription s on r.id=s.id";
             try {
                 Statement stmt = connection.createStatement();
                 ResultSet rs = stmt.executeQuery(sql);
@@ -144,6 +145,7 @@ class RefereeControllerTest {
                     JsonObject jsonObject = (JsonObject) element.get(ind);
 //                    System.out.println(obj == jsonObject);
                     System.out.println(jsonObject);
+
                     mapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);
                     Map<String, Object> map1 = mapper.readValue(obj.toString(), HashMap.class);
                     String json1 = mapper.writeValueAsString(map1);

@@ -1,5 +1,6 @@
 package com.nemo.footballassociation.Contracts.Modules.DbModels;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.Generated;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ public abstract class Subscription {
     @Id
     private int id;
     protected String name;
+    @JsonProperty("user_name")
     protected String userName;
     protected String password;
 
