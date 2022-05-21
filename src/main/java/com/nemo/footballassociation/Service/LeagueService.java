@@ -35,6 +35,11 @@ public class LeagueService implements ILeagueService {
     }
 
     @Override
+    public boolean existsById(int id) {
+        return leagueRepository.existsById(id);
+    }
+
+    @Override
     public void deleteLeague(int id) throws Exception {
         // check whether a league exist in a DB or not
         leagueRepository.findById(id).orElseThrow(() ->
