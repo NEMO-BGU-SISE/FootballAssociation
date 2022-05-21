@@ -30,7 +30,6 @@ public class APIController {
     }
 
     public void setBody(String body){
-
         try(OutputStream os = conn.getOutputStream()) {
             byte[] input = body.getBytes("utf-8");
             os.write(input, 0, input.length);
