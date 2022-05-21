@@ -106,6 +106,7 @@ class RefereeControllerTest {
         try {
             APIController.setRequestMethod("GET");
             int status = conn.getResponseCode();
+            assertEquals(200, status);
             BufferedReader reader;
             String line;
             StringBuffer responseContent = new StringBuffer();
@@ -114,7 +115,6 @@ class RefereeControllerTest {
                 responseContent.append(line);
             }
             reader.close();
-            System.out.println(responseContent.toString());
             String jsonString = responseContent.toString();
             JsonArray element = (JsonArray) new JsonParser().parse(jsonString);
 
@@ -142,9 +142,7 @@ class RefereeControllerTest {
                         String column_name = rsmd.getColumnName(i);
                         obj.put(column_name, rs.getObject(column_name));
                     }
-                    JsonObject jsonObject = (JsonObject) element.get(ind);
-//                    System.out.println(obj == jsonObject);
-                    System.out.println(jsonObject);
+                    JsonObject jsonObject = (JsonObject) element.get(ind++);
 
                     mapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);
                     Map<String, Object> map1 = mapper.readValue(obj.toString(), HashMap.class);
@@ -152,12 +150,10 @@ class RefereeControllerTest {
                     Map<String, Object> map2 = mapper.readValue(jsonObject.toString(), HashMap.class);
                     String json2 = mapper.writeValueAsString(map2);
                     assertEquals(json1, json2);
-//                    System.out.println("id:" + rs.getInt("id") + "\t" + rs.getString("name"));
                 }
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
-            int x = 0;
         } catch (Exception e) {
             e.printStackTrace();
         }
