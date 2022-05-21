@@ -376,7 +376,7 @@ class RefereeControllerTest {
             status = conn.getResponseCode();
             assertEquals(200, status);
             response = apiController.getResponse();
-            assertEquals("Referee Id does not exists", response);
+            assertEquals("{\"id\":3,\"name\":\"noa\",\"password\":\"42f749ade7f9e195bf475f37a44cafcb\",\"user_name\":\"noa@nemo.com\",\"referee_training\":\"BasicTraining\"}", response);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -385,7 +385,31 @@ class RefereeControllerTest {
     }
 
     @Test
-    void updateReferee() {
+    void getRefereeByUserNameBad() {
+        try {
+            url = new URL("http://localhost:8080/referee/userName/dana@nemo.com");
+            apiController = new APIController(url);
+            conn = apiController.getConn();
+            int status = conn.getResponseCode();
+            assertEquals(400, status);
+            String response = apiController.getResponse();
+            assertEquals("Referee user name does not exists", response);
+            url = new URL("http://localhost:8080/referee/userName/navit@nemo.com");
+            apiController = new APIController(url);
+            conn = apiController.getConn();
+            status = conn.getResponseCode();
+            assertEquals(400, status);
+            response = apiController.getResponse();
+            assertEquals("Referee user name does not exists", response);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void updateRefereeGood(){
 
     }
 }
