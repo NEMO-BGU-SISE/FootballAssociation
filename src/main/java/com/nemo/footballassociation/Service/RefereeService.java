@@ -42,7 +42,7 @@ public class RefereeService implements IRefereeService {
     }
 
     @Override
-    public List<Referee> getRefereeByUserName(String userName) {
+    public Referee getRefereeByUserName(String userName) {
         return refereeRepository.findByUserName(userName);
     }
 
