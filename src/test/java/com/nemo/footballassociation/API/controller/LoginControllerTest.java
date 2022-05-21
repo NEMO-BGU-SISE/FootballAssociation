@@ -14,10 +14,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class LoginControllerTest {
     private URL url;
     private URL urlLogin;
+    private URL urlLogout;
     private HttpURLConnection conn;
     private HttpURLConnection connLogin;
+    private HttpURLConnection connLogout;
     private APIController apiController;
     private APIController apiControllerLogin;
+    private APIController apiControllerLogout;
 
     @BeforeEach
     void setUp() {
@@ -28,6 +31,8 @@ class LoginControllerTest {
             urlLogin = new URL("http://localhost:8080/login");
             apiControllerLogin = new APIController(urlLogin);
             connLogin = apiControllerLogin.getConn();
+            apiControllerLogout = new APIController(urlLogin);
+            connLogout = apiControllerLogout.getConn();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -38,16 +43,45 @@ class LoginControllerTest {
     }
 
     @Test
-    void subscriptionLogin() {
+    void subscriptionLoginGood() {
         try {
             apiControllerLogin.setRequestMethod("POST", "");
             apiControllerLogin.setBody("{\n\"userName\": \"admin@nemo.com\",\n\"password\": \"admin\"\n}\n");
-            String auth = apiControllerLogin.getResponse();
+            String auth1 = apiControllerLogin.getResponse();
             int status = connLogin.getResponseCode();
             assertEquals(200, status);
+            urlLogin = new URL("http://localhost:8080/login");
+            apiControllerLogin = new APIController(urlLogin);
+            connLogin = apiControllerLogin.getConn();
             apiControllerLogin.setRequestMethod("POST", "");
             apiControllerLogin.setBody("{\n\"userName\": \"admin@nemo.com\",\n\"password\": \"admin\"\n}\n");
-            auth = apiControllerLogin.getResponse();
+            String auth2 = apiControllerLogin.getResponse();
+            status = connLogin.getResponseCode();
+            assertEquals(200, status);
+            assertNotEquals(auth1, auth2);
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void subscriptionLoginBad() {
+        try {
+            apiControllerLogin.setRequestMethod("POST", "");
+            apiControllerLogin.setBody("{\n\"userName\": \"dana@nemo.com\",\n\"password\": \"admin\"\n}\n");
+            String auth1 = apiControllerLogin.getResponse();
+            assertEquals("Invalid userName or Password", auth1);
+            int status = connLogin.getResponseCode();
+            assertEquals(400, status);
+            urlLogin = new URL("http://localhost:8080/login");
+            apiControllerLogin = new APIController(urlLogin);
+            connLogin = apiControllerLogin.getConn();
+            apiControllerLogin.setRequestMethod("POST", "");
+            apiControllerLogin.setBody("{\n\"userName\": \"navit@nemo.com\",\n\"password\": \"admin\"\n}\n");
+            String auth2 = apiControllerLogin.getResponse();
+            assertEquals("Invalid userName or Password", auth2);
             status = connLogin.getResponseCode();
             assertEquals(400, status);
         } catch (ProtocolException e) {
@@ -58,6 +92,36 @@ class LoginControllerTest {
     }
 
     @Test
-    void subscriptionLogout() {
+    void subscriptionLogoutGood() {
+        try {
+            apiControllerLogin.setRequestMethod("POST", "");
+            apiControllerLogin.setBody("{\n\"userName\": \"admin@nemo.com\",\n\"password\": \"admin\"\n}\n");
+            int status = connLogin.getResponseCode();
+            assertEquals(200, status);
+            String auth = apiControllerLogin.getResponse();
+            connLogin.disconnect();
+            apiControllerLogout.setRequestMethod("DELETE", "");
+            apiControllerLogout.setBody(auth);
+            String auth1 = apiControllerLogout.getResponse(); // todo check why it crushes
+            status = connLogout.getResponseCode();
+            assertEquals(200, status);
+            urlLogin = new URL("http://localhost:8080/login");
+            apiControllerLogin = new APIController(urlLogin);
+            connLogin = apiControllerLogin.getConn();
+            apiControllerLogin.setRequestMethod("POST", "");
+            apiControllerLogin.setBody("{\n\"userName\": \"admin@nemo.com\",\n\"password\": \"admin\"\n}\n");
+            String auth2 = apiControllerLogin.getResponse();
+            status = connLogin.getResponseCode();
+            assertEquals(200, status);
+            assertNotEquals(auth1, auth2);
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void subscriptionLogoutBad() {
     }
 }
