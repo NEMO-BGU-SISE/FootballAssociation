@@ -81,9 +81,11 @@ public class RefereeController {
     // build update referee REST API
     // http://localhost:8080/api/referees/1
     @PutMapping("{id}")
-    public ResponseEntity<Referee> updateReferee(@PathVariable("id") int id
-            , @RequestBody Referee referee) {
+    public ResponseEntity<Referee> updateReferee(@RequestHeader("Authorization") String code, @PathVariable("id") int id, @RequestBody Referee referee) {
         try {
+            if (!loggedInUserService.isRepresentativeOfTheAssociation(code)) {
+                return new ResponseEntity("You are not authorized for this", HttpStatus.UNAUTHORIZED);
+            }
             return new ResponseEntity<Referee>(refereeService.updateReferee(referee, id), HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -93,9 +95,11 @@ public class RefereeController {
     // build delete referee REST API
     // http://localhost:8080/api/referees/1
     @DeleteMapping("{id}")
-    public ResponseEntity<String> deleteReferee(@PathVariable("id") int id) {
-
+    public ResponseEntity<String> deleteReferee(@RequestHeader("Authorization") String code, @PathVariable("id") int id) {
         try {
+            if (!loggedInUserService.isRepresentativeOfTheAssociation(code)) {
+                return new ResponseEntity("You are not authorized for this", HttpStatus.UNAUTHORIZED);
+            }
             // delete referee from DB
             refereeService.deleteReferee(id);
             return new ResponseEntity<String>("Referee deleted successfully!.", HttpStatus.OK);
