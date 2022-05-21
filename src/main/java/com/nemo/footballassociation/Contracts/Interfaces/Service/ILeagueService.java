@@ -8,6 +8,7 @@ public interface ILeagueService {
     League saveLeague(League league);
     List<League> getAllLeague();
     League getLeagueById(int id) throws Exception;
+    boolean existsById(int id);
 //    League updateLeague(League league, int id) throws Exception;
     void deleteLeague(int id) throws Exception;
 }

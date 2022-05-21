@@ -7,8 +7,13 @@ import java.util.List;
 
 public interface ISeasonService {
     Season saveSeason(Season season);
+
     List<Season> getAllSeason();
+
     Season getSeasonById(int id) throws Exception;
-//    Season updateSeason(Season season, int id) throws Exception;
+
+    //    Season updateSeason(Season season, int id) throws Exception;
+    boolean existsById(int id);
+
     void deleteSeason(int id) throws Exception;
 }

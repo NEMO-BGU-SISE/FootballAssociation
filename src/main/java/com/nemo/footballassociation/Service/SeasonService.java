@@ -36,6 +36,11 @@ public class SeasonService implements ISeasonService {
     }
 
     @Override
+    public boolean existsById(int id) {
+        return seasonRepository.existsById(id);
+    }
+
+    @Override
     public void deleteSeason(int id) throws Exception {
         // check whether a season exist in a DB or not
         seasonRepository.findById(id).orElseThrow(() ->

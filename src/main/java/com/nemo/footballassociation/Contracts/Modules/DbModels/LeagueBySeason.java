@@ -27,6 +27,17 @@ public class LeagueBySeason {
     public LeagueBySeason() {
     }
 
+    public LeagueBySeason(Season season, League league, int numOfMatchesBetweenTeamsInSeason) {
+        this.season = season;
+        this.league = league;
+        this.games = new ArrayList<>();
+        this.teams = new ArrayList<>();
+        try {
+            this.assigningPolicy = new AssigningPolicy(numOfMatchesBetweenTeamsInSeason);
+        } catch (Exception ignored) {
+        }
+    }
+
     public void update(LeagueBySeason other) {
         this.setSeason(other.getSeason());
         this.setLeague(other.getLeague());
@@ -107,8 +118,8 @@ public class LeagueBySeason {
             HashSet<TeamByLeagueBySeason[]> dict = new HashSet<>();
             for (TeamByLeagueBySeason teamHome : this.teams) {
                 for (TeamByLeagueBySeason teamAway : this.teams) {
-                    TeamByLeagueBySeason[] array1={teamAway, teamHome};
-                    TeamByLeagueBySeason[] array2={teamHome, teamAway};
+                    TeamByLeagueBySeason[] array1 = {teamAway, teamHome};
+                    TeamByLeagueBySeason[] array2 = {teamHome, teamAway};
                     if (teamHome == teamAway || dict.contains(array1) || dict.contains(array2)) {
                         continue;
                     }
@@ -136,8 +147,7 @@ public class LeagueBySeason {
                     curGame.setHomeTeam(teamHome);
                 }
             }
-        }
-        else{
+        } else {
             return false;
         }
 //        Date start = null;
