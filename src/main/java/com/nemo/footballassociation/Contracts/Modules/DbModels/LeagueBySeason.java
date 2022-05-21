@@ -19,8 +19,7 @@ public class LeagueBySeason {
     private List<Game> games;
     @OneToMany
     private List<TeamByLeagueBySeason> teams;
-    @ManyToOne
-    private AssigningPolicy assigningPolicy;
+    private int numOfMatchesBetweenTeamsInSeason = 1;
 
     private boolean isAssigned = false;
 
@@ -32,10 +31,7 @@ public class LeagueBySeason {
         this.league = league;
         this.games = new ArrayList<>();
         this.teams = new ArrayList<>();
-        try {
-            this.assigningPolicy = new AssigningPolicy(numOfMatchesBetweenTeamsInSeason);
-        } catch (Exception ignored) {
-        }
+        this.setAssigningPolicy(numOfMatchesBetweenTeamsInSeason);
     }
 
     public void update(LeagueBySeason other) {
@@ -63,12 +59,13 @@ public class LeagueBySeason {
         this.teams = teams;
     }
 
-    public AssigningPolicy getAssigningPolicy() {
-        return assigningPolicy;
+    public int getAssigningPolicy() {
+        return numOfMatchesBetweenTeamsInSeason;
     }
 
-    public void setAssigningPolicy(AssigningPolicy assigningPolicy) {
-        this.assigningPolicy = assigningPolicy;
+    public void setAssigningPolicy(int numOfMatchesBetweenTeamsInSeason) {
+        if (numOfMatchesBetweenTeamsInSeason == 1 || numOfMatchesBetweenTeamsInSeason == 2)
+            this.numOfMatchesBetweenTeamsInSeason = numOfMatchesBetweenTeamsInSeason;
     }
 
     public Season getSeason() {
@@ -104,11 +101,11 @@ public class LeagueBySeason {
     }
 
     public boolean AssigningGames() {
-        if (this.assigningPolicy == null || this.isAssigned || this.teams.size() < 2 || this.season == null || this.league == null) {
+        if (this.isAssigned || this.teams.size() < 2 || this.season == null || this.league == null) {
             return false;
         }
         Collections.shuffle(this.games);
-        if (this.assigningPolicy.getNumOfMatchesBetweenTeamsInSeason() == 1) {
+        if (this.numOfMatchesBetweenTeamsInSeason == 1) {
             int numOfGames1 = (this.factorial(this.teams.size()) / (this.factorial(this.teams.size() - 2) * (this.factorial(2))));
             if (numOfGames1 != this.games.size()) {
                 return false;
@@ -130,7 +127,7 @@ public class LeagueBySeason {
                     dict.add(array2);
                 }
             }
-        } else if (this.assigningPolicy.getNumOfMatchesBetweenTeamsInSeason() == 2) {
+        } else if (this.numOfMatchesBetweenTeamsInSeason == 2) {
             int numOfGames2 = (this.factorial(this.teams.size()) / (this.factorial(this.teams.size() - 2)));
             if (numOfGames2 != this.games.size()) {
                 return false;
