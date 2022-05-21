@@ -69,10 +69,10 @@ public class RefereeController {
     }
 
     @GetMapping("userName/{userName}")
-    public ResponseEntity<List<Referee>> getRefereeByUserName(@PathVariable("userName") String refereeUserName) {
+    public ResponseEntity<Referee> getRefereeByUserName(@PathVariable("userName") String refereeUserName) {
         try {
-            Referee referee = refereeService.getRefereeByUserName(refereeUserName);
-            return new ResponseEntity(referee, HttpStatus.OK);
+//            Referee referee = refereeService.getRefereeByUserName(refereeUserName);
+            return new ResponseEntity<Referee>(refereeService.getRefereeByUserName(refereeUserName), HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity("Referee user name does not exists", HttpStatus.BAD_REQUEST);
         }
