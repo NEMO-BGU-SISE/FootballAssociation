@@ -33,7 +33,7 @@ public class GameService implements IGameService {
 
     @Override
     public Game getGameByIds(int gameId) throws Exception {
-        return gameRepository.findByGameId(gameId).orElseThrow(() ->
+        return gameRepository.findById(gameId).orElseThrow(() ->
                 new Exception(""));
     }
 

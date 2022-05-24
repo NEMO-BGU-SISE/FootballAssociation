@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @Repository
 public interface IGameRepository extends JpaRepository<Game, Integer> {
-    public Optional<Game> findByGameId(int gameId);
+    public Optional<Game> findById(int gameId);
 
     public boolean existsById(int id);
 
