@@ -20,7 +20,7 @@ class LeagueBySeasonControllerTest {
 
     @BeforeEach
     void setUp() {
-        try { // todo change
+        try {
             url = new URL("http://localhost:8080/referee");
             apiController = new APIController(url);
             conn = apiController.getConn();
@@ -34,6 +34,16 @@ class LeagueBySeasonControllerTest {
 
     @AfterEach
     void tearDown() {
+        try {
+            if(conn.getResponseCode() == 200) {
+                conn.disconnect();
+            }
+            if(connLogin.getResponseCode() == 200) {
+                connLogin.disconnect();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test

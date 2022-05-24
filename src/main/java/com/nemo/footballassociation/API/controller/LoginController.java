@@ -52,7 +52,7 @@ public class LoginController {
         try {
             if (loggedInUserService.existsByCode(code)) {
                 loggedInUserService.deleteByCode(code);
-                return new ResponseEntity<>(HttpStatus.OK);
+                return new ResponseEntity<>("User was logged out successfully", HttpStatus.OK);
             }
             return new ResponseEntity<>("Invalid userName or Password", HttpStatus.BAD_REQUEST);
         } catch (Exception ex) {
