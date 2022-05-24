@@ -89,4 +89,9 @@ public class Game {
         this.events = events;
     }
 
+    public void update(Game other) {
+        this.setAwayTeam(other.getAwayTeam());
+        this.setHomeTeam(other.getHomeTeam());
+    }
+
 }

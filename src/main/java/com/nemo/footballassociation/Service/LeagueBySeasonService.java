@@ -1,10 +1,7 @@
 package com.nemo.footballassociation.Service;
 
 import com.nemo.footballassociation.Contracts.Interfaces.Repository.ILeagueBySeasonRepository;
-import com.nemo.footballassociation.Contracts.Interfaces.Repository.ILeagueRepository;
 import com.nemo.footballassociation.Contracts.Interfaces.Service.ILeagueBySeasonService;
-import com.nemo.footballassociation.Contracts.Interfaces.Service.ILeagueService;
-import com.nemo.footballassociation.Contracts.Modules.DbModels.League;
 import com.nemo.footballassociation.Contracts.Modules.DbModels.LeagueBySeason;
 import org.springframework.stereotype.Service;
 

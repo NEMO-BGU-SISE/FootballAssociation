@@ -1,9 +1,7 @@
 package com.nemo.footballassociation.API.controller;
 
-import com.nemo.footballassociation.Contracts.Interfaces.Service.ILeagueBySeasonService;
-import com.nemo.footballassociation.Contracts.Interfaces.Service.ILeagueService;
-import com.nemo.footballassociation.Contracts.Interfaces.Service.ILoggedInUserService;
-import com.nemo.footballassociation.Contracts.Interfaces.Service.ISeasonService;
+import com.nemo.footballassociation.Contracts.Interfaces.Service.*;
+import com.nemo.footballassociation.Contracts.Modules.DbModels.Game;
 import com.nemo.footballassociation.Contracts.Modules.DbModels.League;
 import com.nemo.footballassociation.Contracts.Modules.DbModels.LeagueBySeason;
 import com.nemo.footballassociation.Contracts.Modules.DbModels.Season;
@@ -24,13 +22,15 @@ public class LeagueBySeasonController {
     private ILeagueService leagueService;
     private ISeasonService seasonService;
     private ILoggedInUserService loggedInUserService;
+    private IGameService gameService;
 
-    public LeagueBySeasonController(LeagueBySeasonService leagueBySeasonService, LoggedInUserService loggedInUserService, ILeagueService leagueService, ISeasonService seasonService) {
+    public LeagueBySeasonController(LeagueBySeasonService leagueBySeasonService, LoggedInUserService loggedInUserService, ILeagueService leagueService, ISeasonService seasonService, IGameService gameService) {
         super();
         this.leagueBySeasonService = leagueBySeasonService;
         this.loggedInUserService = loggedInUserService;
         this.leagueService = leagueService;
         this.seasonService = seasonService;
+        this.gameService = gameService;
     }
 
     @GetMapping
@@ -50,7 +50,10 @@ public class LeagueBySeasonController {
             }
             LeagueBySeason leagueBySeason = leagueBySeasonService.getLBSByIds(leagueId, seasonId);
             if (leagueBySeason.AssigningGames()) {
-                return new ResponseEntity<>(leagueBySeasonService.saveLBS(leagueBySeason), HttpStatus.CREATED);
+                for (Game game: leagueBySeason.getGames()) {
+                    gameService.updateGame(game, game.getId());
+                }
+                return new ResponseEntity("All games were updated successfully", HttpStatus.CREATED);
             } else {
                 return new ResponseEntity("Can't assign games", HttpStatus.BAD_REQUEST);
             }

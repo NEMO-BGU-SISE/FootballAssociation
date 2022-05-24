@@ -112,11 +112,11 @@ public class LeagueBySeason {
             }
             Game curGame;
             int index = 0;
-            HashSet<TeamByLeagueBySeason[]> dict = new HashSet<>();
+            HashSet<String> dict = new HashSet<>();
             for (TeamByLeagueBySeason teamHome : this.teams) {
                 for (TeamByLeagueBySeason teamAway : this.teams) {
-                    TeamByLeagueBySeason[] array1 = {teamAway, teamHome};
-                    TeamByLeagueBySeason[] array2 = {teamHome, teamAway};
+                    String array1 = "{"+ teamAway.getId() +","+ teamHome.getId()+"}";
+                    String array2 = "{"+ teamHome.getId() +","+ teamAway.getId()+"}";
                     if (teamHome == teamAway || dict.contains(array1) || dict.contains(array2)) {
                         continue;
                     }
