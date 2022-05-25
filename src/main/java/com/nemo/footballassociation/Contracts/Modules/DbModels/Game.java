@@ -11,9 +11,9 @@ public class Game {
     @Id
     private int id;
     private Date dateTime;
-    @Nullable
+
     private int homeScore;
-    @Nullable
+
     private int awayScore;
     @ManyToOne
     private TeamByLeagueBySeason homeTeam;

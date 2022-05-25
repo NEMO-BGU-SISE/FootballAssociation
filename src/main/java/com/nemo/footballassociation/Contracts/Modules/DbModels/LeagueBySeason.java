@@ -100,6 +100,14 @@ public class LeagueBySeason {
         isAssigned = assigned;
     }
 
+    public int getNumOfMatchesBetweenTeamsInSeason() {
+        return numOfMatchesBetweenTeamsInSeason;
+    }
+
+    public void setNumOfMatchesBetweenTeamsInSeason(int numOfMatchesBetweenTeamsInSeason) {
+        this.numOfMatchesBetweenTeamsInSeason = numOfMatchesBetweenTeamsInSeason;
+    }
+
     public boolean AssigningGames() {
         if (this.isAssigned || this.teams.size() < 2 || this.season == null || this.league == null) {
             return false;
@@ -115,8 +123,8 @@ public class LeagueBySeason {
             HashSet<String> dict = new HashSet<>();
             for (TeamByLeagueBySeason teamHome : this.teams) {
                 for (TeamByLeagueBySeason teamAway : this.teams) {
-                    String array1 = "{"+ teamAway.getId() +","+ teamHome.getId()+"}";
-                    String array2 = "{"+ teamHome.getId() +","+ teamAway.getId()+"}";
+                    String array1 = "{" + teamAway.getId() + "," + teamHome.getId() + "}";
+                    String array2 = "{" + teamHome.getId() + "," + teamAway.getId() + "}";
                     if (teamHome == teamAway || dict.contains(array1) || dict.contains(array2)) {
                         continue;
                     }

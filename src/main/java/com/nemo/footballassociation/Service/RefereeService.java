@@ -5,6 +5,7 @@ import com.nemo.footballassociation.Contracts.Interfaces.Repository.IRefereeRepo
 import com.nemo.footballassociation.Contracts.Modules.DbModels.Referee;
 import com.nemo.footballassociation.Contracts.Interfaces.Service.IRefereeService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -53,11 +54,12 @@ public class RefereeService implements IRefereeService {
     }
 
     @Override
-    public boolean existsById(int id){
+    public boolean existsById(int id) {
         return refereeRepository.existsById(id);
     }
 
     @Override
+    @Transactional
     public Referee updateReferee(Referee referee, int id) throws Exception {
 
         // we need to check whether referee with given id is exist in DB or not

@@ -48,17 +48,13 @@ public class LeagueBySeasonController {
             if (!leagueBySeasonService.existsLbsByIds(leagueId, seasonId)) {
                 return new ResponseEntity("invalid couple of league and season ids", HttpStatus.BAD_REQUEST);
             }
-            LeagueBySeason leagueBySeason = leagueBySeasonService.getLBSByIds(leagueId, seasonId);
-            if (leagueBySeason.AssigningGames()) {
-                for (Game game: leagueBySeason.getGames()) {
-                    gameService.updateGame(game, game.getId());
-                }
+            if (leagueBySeasonService.assignGames(leagueId, seasonId)) {
                 return new ResponseEntity("All games were updated successfully", HttpStatus.CREATED);
             } else {
                 return new ResponseEntity("Can't assign games", HttpStatus.BAD_REQUEST);
             }
         } catch (Exception ex) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

@@ -78,27 +78,27 @@ public class RefereeController {
         }
     }
 
-//    // build update referee REST API
-//    // http://localhost:8080/api/referees/1
-//    @PutMapping("{id}")
-//    public ResponseEntity<Referee> updateReferee(@RequestHeader("Authorization") String code, @PathVariable("id") int id, @RequestBody RefereeUpdateDto referee) {
-//        try {
-//            if (!loggedInUserService.isRepresentativeOfTheAssociation(code)) {
-//                return new ResponseEntity("You are not authorized for this", HttpStatus.UNAUTHORIZED);
-//            }
-//            if (!refereeService.existsById(id)) {
-//                return new ResponseEntity("referee id doesn't exists", HttpStatus.BAD_REQUEST);
-//            }
-//            Referee refereeToUpdate = refereeService.getRefereeById(id);
-//
-//            refereeToUpdate.setName(referee.getName());
-//            refereeToUpdate.setPassword(referee.getPassword());
-//            refereeToUpdate.setRefereeTraining(referee.getRefereeTraining());
-//            return new ResponseEntity<>(refereeService.updateReferee(refereeToUpdate, id), HttpStatus.OK);
-//        } catch (Exception ex) {
-//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
+    // build update referee REST API
+    // http://localhost:8080/api/referees/1
+    @PutMapping("{id}")
+    public ResponseEntity<Referee> updateReferee(@RequestHeader("Authorization") String code, @PathVariable("id") int id, @RequestBody RefereeUpdateDto referee) {
+        try {
+            if (!loggedInUserService.isRepresentativeOfTheAssociation(code)) {
+                return new ResponseEntity("You are not authorized for this", HttpStatus.UNAUTHORIZED);
+            }
+            if (!refereeService.existsById(id)) {
+                return new ResponseEntity("referee id doesn't exists", HttpStatus.BAD_REQUEST);
+            }
+            Referee refereeToUpdate = refereeService.getRefereeById(id);
+
+            refereeToUpdate.setName(referee.getName());
+            refereeToUpdate.setPassword(referee.getPassword());
+            refereeToUpdate.setRefereeTraining(referee.getRefereeTraining());
+            return new ResponseEntity<>(refereeService.updateReferee(refereeToUpdate, id), HttpStatus.OK);
+        } catch (Exception ex) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     // build delete referee REST API
     // http://localhost:8080/api/referees/1

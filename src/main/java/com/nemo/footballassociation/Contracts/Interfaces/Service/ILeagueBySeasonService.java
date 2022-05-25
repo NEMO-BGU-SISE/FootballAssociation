@@ -14,4 +14,5 @@ public interface ILeagueBySeasonService {
     LeagueBySeason getLBSByIds(int leagueId, int seasonId) throws Exception;
 
     LeagueBySeason updateLBS(LeagueBySeason league, int id) throws Exception;
+    boolean assignGames(int leagueId, int seasonId) throws Exception;
 }
