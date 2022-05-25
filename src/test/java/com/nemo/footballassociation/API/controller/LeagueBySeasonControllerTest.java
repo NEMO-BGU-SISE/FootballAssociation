@@ -8,8 +8,6 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class LeagueBySeasonControllerTest {
     private URL url;
     private URL urlLogin;

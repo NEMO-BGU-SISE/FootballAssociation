@@ -72,10 +72,9 @@ class LoginControllerTest {
             status = connLogin.getResponseCode();
             assertEquals(200, status);
             assertNotEquals(auth1, auth2);
-        } catch (ProtocolException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            assertTrue(false);
         }
     }
 
@@ -97,44 +96,9 @@ class LoginControllerTest {
             assertEquals("Invalid userName or Password", auth2);
             status = connLogin.getResponseCode();
             assertEquals(400, status);
-        } catch (ProtocolException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            assertTrue(false);
         }
     }
-
-//    @Test
-//    void subscriptionLogoutGood() {
-//        try {
-//            apiControllerLogin.setRequestMethod("POST", "");
-//            apiControllerLogin.setBody("{\n\"userName\": \"admin@nemo.com\",\n\"password\": \"admin\"\n}\n");
-//            int status = connLogin.getResponseCode();
-//            assertEquals(200, status);
-//            String auth = apiControllerLogin.getResponse();
-//            connLogin.disconnect();
-//            apiControllerLogout.setRequestMethod("DELETE", auth);
-//            apiControllerLogout.setBody(auth);
-//            String auth1 = apiControllerLogout.getResponse(); // todo check why it crushes
-//            status = connLogout.getResponseCode();
-//            assertEquals(200, status);
-//            urlLogin = new URL("http://localhost:8080/login");
-//            apiControllerLogin = new APIController(urlLogin);
-//            connLogin = apiControllerLogin.getConn();
-//            apiControllerLogin.setRequestMethod("POST", "");
-//            apiControllerLogin.setBody("{\n\"userName\": \"admin@nemo.com\",\n\"password\": \"admin\"\n}\n");
-//            String auth2 = apiControllerLogin.getResponse();
-//            status = connLogin.getResponseCode();
-//            assertEquals(200, status);
-//            assertNotEquals(auth1, auth2);
-//        } catch (ProtocolException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    @Test
-//    void subscriptionLogoutBad() {
-//    }
 }
