@@ -3,6 +3,7 @@ package com.nemo.footballassociation.Contracts.Modules.DbModels;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,10 +23,10 @@ public class Game {
     @ManyToMany
     private List<Event> events;
 
-    public Game(int id, Date dateTime, List<Event> events) {
+    public Game(int id, Date dateTime) {
         this.id = id;
         this.dateTime = dateTime;
-        this.events = events;
+        this.events = new ArrayList<>();
     }
 
     public Game() {

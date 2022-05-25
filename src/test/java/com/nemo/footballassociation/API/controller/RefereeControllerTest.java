@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class RefereeControllerTest {
     private URL url;
@@ -129,12 +130,9 @@ class RefereeControllerTest {
             assertEquals(200, status);
             int rowsAfterDelete = countRows();
             assertEquals(rowsBeforeInsert, rowsAfterDelete);
-        } catch (MalformedURLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        } catch (ProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            assertTrue(false);
         }
     }
 
@@ -155,12 +153,9 @@ class RefereeControllerTest {
             assertEquals(400, status);
             int rowsAfterDelete = countRows();
             assertEquals(rowsBeforeInsert, rowsAfterDelete);
-        } catch (ProtocolException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            assertTrue(false);
         }
     }
 
@@ -204,6 +199,7 @@ class RefereeControllerTest {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            assertTrue(false);
         }
     }
 
@@ -234,6 +230,7 @@ class RefereeControllerTest {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            assertTrue(false);
         }
     }
 
@@ -261,6 +258,7 @@ class RefereeControllerTest {
                 connection = DriverManager.getConnection(url);
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
+                assertTrue(false);
             }
             String sql = "select s.id, s.name, s.user_name, s.password, r.referee_training " +
                     "from referee r inner join subscription s on r.id=s.id";
@@ -289,12 +287,14 @@ class RefereeControllerTest {
                 }
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
+                assertTrue(false);
             }
             finally {
                 connection.close();
             }
         } catch (Exception e) {
             e.printStackTrace();
+            assertTrue(false);
         }
     }
 
@@ -322,10 +322,9 @@ class RefereeControllerTest {
             assertEquals(200, status);
             response = apiController.getResponse();
             assertEquals("{\"id\":3,\"name\":\"maor\",\"password\":\"42f749ade7f9e195bf475f37a44cafcb\",\"user_name\":\"maor@nemo.com\",\"referee_training\":\"BasicTraining\"}", response);
-        } catch (MalformedURLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            assertTrue(false);
         }
     }
 
@@ -346,10 +345,9 @@ class RefereeControllerTest {
             assertEquals(400, status);
             response = apiController.getResponse();
             assertEquals("Referee Id does not exists", response);
-        } catch (MalformedURLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            assertTrue(false);
         }
     }
 
@@ -370,10 +368,9 @@ class RefereeControllerTest {
             assertEquals(200, status);
             response = apiController.getResponse();
             assertEquals("{\"id\":4,\"name\":\"noa\",\"password\":\"cb16979fd5ba7497bbcec4b1157aad11\",\"user_name\":\"noa@nemo.com\",\"referee_training\":\"AdvanceTraining\"}", response);
-        } catch (MalformedURLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            assertTrue(false);
         }
     }
 
@@ -394,34 +391,9 @@ class RefereeControllerTest {
             assertEquals(400, status);
             response = apiController.getResponse();
             assertEquals("Referee user name does not exists", response);
-        } catch (MalformedURLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            assertTrue(false);
         }
     }
-
-//    @Test
-//    void updateRefereeGood(){
-//        try {
-//            apiControllerLogin.setRequestMethod("POST", "");
-//            apiControllerLogin.setBody("{\n\"userName\": \"admin@nemo.com\",\n\"password\": \"admin\"\n}\n");
-//            String auth = apiControllerLogin.getResponse();
-//            String jsonString = "{\"name\":\"maya\",\"password\":\"42f749ade7f9e195bf475f37a44cafcb\",\"user_name\":\"maya123@nemo.com\",\"referee_training\":\"AdvanceTraining\"}";
-//            url = new URL("http://localhost:8080/referee/1");
-//            apiController = new APIController(url);
-//            conn = apiController.getConn();
-//            apiController.setRequestMethod("PUT", auth);
-//            apiController.setBody(jsonString);
-//            String response = apiController.getResponse();
-//            int status = conn.getResponseCode();
-//            assertEquals(200, status);
-//        } catch (ProtocolException e) {
-//            e.printStackTrace();
-//        } catch (MalformedURLException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
 }
