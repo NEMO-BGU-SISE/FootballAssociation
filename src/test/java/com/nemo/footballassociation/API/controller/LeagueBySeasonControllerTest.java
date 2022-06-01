@@ -114,11 +114,6 @@ class LeagueBySeasonControllerTest {
     }
 
     @Test
-    void getAll() {
-
-    }
-
-    @Test
     void assigningGamesPolicy1() {
         leagueBySeason1.setGames(games3);
         team1.setLeagueBySeason(leagueBySeason1);
@@ -184,9 +179,5 @@ class LeagueBySeasonControllerTest {
             oppositeTeamsString = "{" + curTeams[1]+"," + curTeams[0]+ "}";
             assertTrue(allGamesString.contains(oppositeTeamsString));
         }
-    }
-
-    @Test
-    void create() {
     }
 }
