@@ -128,25 +128,62 @@ class LeagueBySeasonControllerTest {
             assertNull(curGame.getAwayTeam());
         }
         leagueBySeason1.AssigningGames();
-        ArrayList<String> valid = new ArrayList<>();
-        ArrayList<String> notValid = new ArrayList<>();
-        String teams;
-        String notTeams;
+        ArrayList<int[]> valid = new ArrayList<>();
+        ArrayList<int[]> notValid = new ArrayList<>();
+        ArrayList<String> validString = new ArrayList<>();
+        ArrayList<String> notValidString = new ArrayList<>();
+        int[] teams;
+        String teamsString;
+        int[] notTeams;
+        String notTeamsString;
         for (Game curGame: leagueBySeason1.getGames()) {
             assertNotNull(curGame.getAwayTeam());
-            teams = "{"+curGame.getHomeTeam().getId()+","+ curGame.getAwayTeam().getId()+"}";
-            notTeams = "{"+curGame.getAwayTeam().getId()+","+ curGame.getHomeTeam().getId()+"}";
-            assertFalse(notValid.contains(teams));
+            teams = new int[]{curGame.getHomeTeam().getId(), curGame.getAwayTeam().getId()};
+            notTeams = new int[]{curGame.getAwayTeam().getId(), curGame.getHomeTeam().getId()};
+            teamsString = "{"+ curGame.getHomeTeam().getId()+ "," + curGame.getAwayTeam().getId() + "}";
+            notTeamsString = "{"+ curGame.getAwayTeam().getId()+ "," + curGame.getHomeTeam().getId() + "}";
+            assertFalse(notValidString.contains(teamsString));
             valid.add(teams);
             notValid.add(notTeams);
+            validString.add(teamsString);
+            notValidString.add(notTeamsString);
         }
         assertEquals(games3.size(), valid.size());
         assertEquals(games3.size(), notValid.size());
+        String oppositeTeamsString;
+        for (int[] curTeams: valid) {
+            oppositeTeamsString =  "{" + curTeams[1]+","+ curTeams[0]+"}";
+            assertTrue(notValidString.contains(oppositeTeamsString));
+        }
     }
 
     @Test
     void assigningGamesPolicy2() {
         leagueBySeason2.setGames(games6);
+        team1.setLeagueBySeason(leagueBySeason2);
+        team2.setLeagueBySeason(leagueBySeason2);
+        team3.setLeagueBySeason(leagueBySeason2);
+        for (Game curGame: leagueBySeason2.getGames()) {
+            assertNull(curGame.getAwayTeam());
+        }
+        leagueBySeason2.AssigningGames();
+        ArrayList<int[]> allGames = new ArrayList<>();
+        ArrayList<String> allGamesString = new ArrayList<>();
+        int[] teams;
+        String teamsString;
+        for (Game curGame: leagueBySeason2.getGames()) {
+            assertNotNull(curGame.getAwayTeam());
+            teams = new int[]{curGame.getHomeTeam().getId(), curGame.getAwayTeam().getId()};
+            teamsString = "{"+ curGame.getHomeTeam().getId()+ "," + curGame.getAwayTeam().getId() + "}";
+            allGames.add(teams);
+            allGamesString.add(teamsString);
+        }
+        assertEquals(games6.size(), allGames.size());
+        String oppositeTeamsString;
+        for (int[] curTeams: allGames) {
+            oppositeTeamsString = "{" + curTeams[1]+"," + curTeams[0]+ "}";
+            assertTrue(allGamesString.contains(oppositeTeamsString));
+        }
     }
 
     @Test
