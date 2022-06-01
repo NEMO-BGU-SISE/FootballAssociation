@@ -8,7 +8,10 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class LeagueBySeasonControllerTest {
     private URL url;
@@ -42,12 +45,25 @@ class LeagueBySeasonControllerTest {
             urlLogin = new URL("http://localhost:8080/login");
             apiControllerLogin = new APIController(urlLogin);
             connLogin = apiControllerLogin.getConn();
+
+            games3 = new ArrayList<>();
+            games6 = new ArrayList<>();
+
             Team team11 = new Team();
             Team team22 = new Team();
             Team team33 = new Team();
+
+            team1 = new TeamByLeagueBySeason();
+            team2 = new TeamByLeagueBySeason();
+            team3 = new TeamByLeagueBySeason();
+
             team1.setTeam(team11);
             team2.setTeam(team22);
             team3.setTeam(team33);
+            team1.setId(1);
+            team2.setId(2);
+            team3.setId(3);
+
             game1 = new Game();
             game2 = new Game();
             game3 = new Game();
@@ -70,6 +86,14 @@ class LeagueBySeasonControllerTest {
             league = new League();
             leagueBySeason1 = new LeagueBySeason(season, league, 1);
             leagueBySeason2 = new LeagueBySeason(season, league, 2);
+
+            leagueBySeason1.getTeams().add(team1);
+            leagueBySeason1.getTeams().add(team2);
+            leagueBySeason1.getTeams().add(team3);
+
+            leagueBySeason2.getTeams().add(team1);
+            leagueBySeason2.getTeams().add(team2);
+            leagueBySeason2.getTeams().add(team3);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -97,7 +121,27 @@ class LeagueBySeasonControllerTest {
     @Test
     void assigningGamesPolicy1() {
         leagueBySeason1.setGames(games3);
-
+        team1.setLeagueBySeason(leagueBySeason1);
+        team2.setLeagueBySeason(leagueBySeason1);
+        team3.setLeagueBySeason(leagueBySeason1);
+        for (Game curGame: leagueBySeason1.getGames()) {
+            assertNull(curGame.getAwayTeam());
+        }
+        leagueBySeason1.AssigningGames();
+        ArrayList<String> valid = new ArrayList<>();
+        ArrayList<String> notValid = new ArrayList<>();
+        String teams;
+        String notTeams;
+        for (Game curGame: leagueBySeason1.getGames()) {
+            assertNotNull(curGame.getAwayTeam());
+            teams = "{"+curGame.getHomeTeam().getId()+","+ curGame.getAwayTeam().getId()+"}";
+            notTeams = "{"+curGame.getAwayTeam().getId()+","+ curGame.getHomeTeam().getId()+"}";
+            assertFalse(notValid.contains(teams));
+            valid.add(teams);
+            notValid.add(notTeams);
+        }
+        assertEquals(games3.size(), valid.size());
+        assertEquals(games3.size(), notValid.size());
     }
 
     @Test
